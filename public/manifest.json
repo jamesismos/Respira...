@@ -24,6 +24,42 @@
   "categories": ["health", "lifestyle"],
   "lang": "pt-BR",
   "id": "/",
+  "scope": "/",
+  "dir": "ltr",
+  "prefer_related_applications": false,
+  "related_applications": [],
+  "display_override": ["standalone", "window-controls-overlay"],
+  "launch_handler": {
+    "client_mode": "focus-existing"
+  },
+  "shortcuts": [
+    {
+      "name": "SOS Vontade",
+      "short_name": "SOS",
+      "description": "Abrir o timer de respiração de emergência",
+      "url": "/sos",
+      "icons": [
+        {
+          "src": "/icons/respira_app_icon.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Registrar Gatilho",
+      "short_name": "Gatilhos",
+      "description": "Anotar gatilho do momento",
+      "url": "/triggers",
+      "icons": [
+        {
+          "src": "/icons/respira_app_icon.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
   "screenshots": [
     {
       "src": "/screenshots/screenshot1.png",

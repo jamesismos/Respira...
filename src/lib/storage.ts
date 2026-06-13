@@ -33,9 +33,12 @@ export function loadAppData(): AppData {
     if (!raw) return { ...defaultData }
     const parsed = JSON.parse(raw) as Partial<AppData>
     return {
-      ...defaultData,
-      ...parsed,
+      profile: parsed.profile || null,
       settings: { ...defaultSettings, ...(parsed.settings ?? {}) },
+      cravingLogs: Array.isArray(parsed.cravingLogs) ? parsed.cravingLogs : [],
+      relapseLogs: Array.isArray(parsed.relapseLogs) ? parsed.relapseLogs : [],
+      dailyLogs: Array.isArray(parsed.dailyLogs) ? parsed.dailyLogs : [],
+      version: parsed.version || APP_VERSION,
     }
   } catch {
     return { ...defaultData }
