@@ -1,0 +1,116 @@
+'use client'
+
+import { useState } from 'react'
+import { QRCodeSVG } from 'qrcode.react'
+import { donationConfig } from '@/data/donation'
+import { Copy, Check, ExternalLink, Heart, Github } from 'lucide-react'
+
+export default function DonationCard() {
+  const [copied, setCopied] = useState(false)
+  const [showQR, setShowQR] = useState(false)
+
+  async function handleCopy() {
+    await navigator.clipboard.writeText(donationConfig.pixKey)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2500)
+  }
+
+  return (
+    <div className="glass-card p-5 border-[rgba(52,211,153,0.2)] flex flex-col gap-4">
+      {/* Header */}
+      <div className="flex items-center gap-3">
+        <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#38BDF8]/20 to-[#34D399]/20 flex items-center justify-center">
+          <Heart size={18} className="text-[#34D399]" />
+        </div>
+        <div>
+          <h3 className="text-[#F8FAFC] font-semibold text-sm">Apoio opcional</h3>
+          <p className="text-[#A7B4C2] text-xs">James Oliveira</p>
+        </div>
+      </div>
+
+      {/* Text */}
+      <p className="text-[#A7B4C2] text-sm leading-relaxed">
+        O Respira é gratuito, sem anúncios e sem coleta de dados.
+        Se quiser apoiar o projeto, qualquer contribuição ajuda a manter isso vivo.
+      </p>
+
+      {/* Pix */}
+      <div className="flex flex-col gap-2">
+        <p className="text-[#A7B4C2] text-xs font-medium">Pix — {donationConfig.pixKeyLabel}</p>
+        <div className="flex gap-2">
+          <div className="flex-1 bg-[#162230] rounded-xl px-3 py-2.5 text-[#F8FAFC] text-xs font-mono overflow-hidden text-ellipsis whitespace-nowrap">
+            {donationConfig.pixKey}
+          </div>
+          <button
+            id="btn-copy-pix"
+            onClick={handleCopy}
+            className="px-3 py-2.5 rounded-xl bg-gradient-to-br from-[#38BDF8]/20 to-[#34D399]/20 border border-[rgba(52,211,153,0.2)] transition-all active:scale-95"
+          >
+            {copied ? <Check size={16} className="text-[#34D399]" /> : <Copy size={16} className="text-[#38BDF8]" />}
+          </button>
+        </div>
+        {copied && (
+          <p className="text-[#34D399] text-xs animate-float-up">Copiado! 💚</p>
+        )}
+
+        {/* QR Code toggle */}
+        <button
+          onClick={() => setShowQR(v => !v)}
+          className="text-[#A7B4C2] text-xs underline underline-offset-4 text-left hover:text-[#38BDF8] transition-colors w-fit"
+        >
+          {showQR ? 'Ocultar QR Code' : 'Ver QR Code Pix'}
+        </button>
+
+        {showQR && (
+          <div className="flex justify-center p-4 bg-white rounded-xl">
+            <QRCodeSVG
+              value={`${donationConfig.pixKey}`}
+              size={160}
+              level="M"
+            />
+          </div>
+        )}
+      </div>
+
+      {/* External links */}
+      <div className="flex flex-col gap-2">
+        {donationConfig.githubSponsors && (
+          <a
+            href={donationConfig.githubSponsors}
+            target="_blank"
+            rel="noopener noreferrer"
+            id="link-github-sponsors"
+            className="flex items-center gap-3 py-2.5 px-3 rounded-xl bg-[#162230] border border-[rgba(56,189,248,0.15)] text-[#A7B4C2] text-sm transition-colors hover:text-[#F8FAFC]"
+          >
+            <Github size={16} className="text-[#38BDF8]" />
+            GitHub Sponsors
+            <ExternalLink size={12} className="ml-auto opacity-50" />
+          </a>
+        )}
+        {donationConfig.buyMeACoffee && (
+          <a
+            href={donationConfig.buyMeACoffee}
+            target="_blank"
+            rel="noopener noreferrer"
+            id="link-buy-coffee"
+            className="flex items-center gap-3 py-2.5 px-3 rounded-xl bg-[#162230] border border-[rgba(56,189,248,0.15)] text-[#A7B4C2] text-sm transition-colors hover:text-[#F8FAFC]"
+          >
+            ☕ Buy Me a Coffee
+            <ExternalLink size={12} className="ml-auto opacity-50" />
+          </a>
+        )}
+        <a
+          href={donationConfig.repositoryUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          id="link-github-repo"
+          className="flex items-center gap-3 py-2.5 px-3 rounded-xl bg-[#162230] border border-[rgba(56,189,248,0.15)] text-[#A7B4C2] text-sm transition-colors hover:text-[#F8FAFC]"
+        >
+          <Github size={16} className="text-[#A7B4C2]" />
+          Repositório no GitHub
+          <ExternalLink size={12} className="ml-auto opacity-50" />
+        </a>
+      </div>
+    </div>
+  )
+}
