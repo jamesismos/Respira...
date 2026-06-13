@@ -22,5 +22,22 @@
     }
   ],
   "categories": ["health", "lifestyle"],
-  "lang": "pt-BR"
+  "lang": "pt-BR",
+  "id": "/",
+  "screenshots": [
+    {
+      "src": "/screenshots/screenshot1.png",
+      "sizes": "1254x1254",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Tela Inicial do Respira"
+    },
+    {
+      "src": "/screenshots/screenshot2.png",
+      "sizes": "1254x1254",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Painel de Progresso do Respira"
+    }
+  ]
 }
