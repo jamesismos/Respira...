@@ -3,10 +3,10 @@
 // ============================================================
 
 import type { AppData } from '@/types'
-import { loadData, saveData } from './storage'
+import { loadAppData, saveAppData } from './storage'
 
 export function exportBackup(): void {
-  const data = loadData()
+  const data = loadAppData()
   const exportData: AppData = {
     ...data,
     exportedAt: new Date().toISOString(),
@@ -34,7 +34,7 @@ export function importBackup(file: File): Promise<{ success: boolean; message: s
           resolve({ success: false, message: 'Arquivo inválido ou corrompido.' })
           return
         }
-        saveData(data)
+        saveAppData(data)
         resolve({ success: true, message: 'Backup restaurado com sucesso! 💚' })
       } catch {
         resolve({ success: false, message: 'Não foi possível ler o arquivo.' })
