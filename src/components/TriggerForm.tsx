@@ -150,7 +150,7 @@ export default function TriggerForm({ onSave, onCancel, resisted = true }: Trigg
           type="submit"
           className="flex-1 py-3 rounded-xl bg-gradient-to-r from-[#38BDF8] to-[#34D399] text-white font-semibold text-sm transition-opacity active:scale-[0.98] cursor-pointer"
         >
-          Confirmar
+          Salvar registro
         </button>
       </div>
     </form>

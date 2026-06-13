@@ -94,4 +94,4 @@ body {
 
 /* Bottom nav safe area */
 .pb-safe { padding-bottom: max(1rem, env(safe-area-inset-bottom)); }
-.mb-nav { margin-bottom: 80px; }
+.mb-nav { padding-bottom: 120px; }
