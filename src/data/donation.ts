@@ -11,21 +11,20 @@ export interface DonationConfig {
   pixKey: string
   pixKeyType: 'email' | 'cpf' | 'phone' | 'random'
   pixKeyLabel: string
+  bitcoinAddress: string
   githubSponsors?: string
   buyMeACoffee?: string
   authorName: string
   authorGithub: string
-  repositoryUrl: string
 }
 
 export const donationConfig: DonationConfig = {
-  // ← Substitua pela sua chave Pix aleatória (gerada no app do banco)
-  pixKey: 'sua-chave-pix-aleatoria-aqui',
+  pixKey: 'c23396a1-9c0e-4795-919e-d48e528074f2',
   pixKeyType: 'random',
   pixKeyLabel: 'Chave aleatória',
+  bitcoinAddress: 'bc1qzewr447fjwln66es26qdzkwmpqy3ukfvs89nnz',
   githubSponsors: 'https://github.com/sponsors/jamesismos',
-  buyMeACoffee: undefined, // ← adicione se quiser: 'https://buymeacoffee.com/jamesismos'
+  buyMeACoffee: undefined,
   authorName: 'James Oliveira',
   authorGithub: 'https://github.com/jamesismos',
-  repositoryUrl: 'https://github.com/jamesismos/Respira',
 }
