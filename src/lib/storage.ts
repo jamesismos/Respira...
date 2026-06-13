@@ -90,7 +90,8 @@ export function completeOnboarding(): void {
 
 export function addCravingLog(log: CravingLog): void {
   const data = loadAppData()
-  saveAppData({ ...data, cravingLogs: [log, ...data.cravingLogs] })
+  const list = Array.isArray(data.cravingLogs) ? data.cravingLogs : []
+  saveAppData({ ...data, cravingLogs: [log, ...list] })
 }
 
 export function loadCravingLogs(): CravingLog[] {
@@ -104,10 +105,11 @@ export function addRelapseLog(log: RelapseLog, newLastSmoked: string): void {
   const updatedProfile = data.profile
     ? { ...data.profile, lastSmoked: newLastSmoked }
     : null
+  const list = Array.isArray(data.relapseLogs) ? data.relapseLogs : []
   saveAppData({
     ...data,
     profile: updatedProfile,
-    relapseLogs: [log, ...data.relapseLogs],
+    relapseLogs: [log, ...list],
   })
 }
 

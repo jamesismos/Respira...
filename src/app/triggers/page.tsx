@@ -12,6 +12,7 @@ import clsx from 'clsx'
 export default function TriggersPage() {
   const [logs, setLogs] = useState<CravingLog[]>([])
   const [showForm, setShowForm] = useState(false)
+  const [successMessage, setSuccessMessage] = useState<string | null>(null)
 
   function reload() {
     const data = loadAppData()
@@ -28,6 +29,8 @@ export default function TriggersPage() {
     }
     addCravingLog(entry)
     setShowForm(false)
+    setSuccessMessage('Gatilho registrado com sucesso! 💚')
+    setTimeout(() => setSuccessMessage(null), 3000)
     reload()
   }
 
@@ -71,6 +74,13 @@ export default function TriggersPage() {
             <Plus size={20} className="text-white" />
           </button>
         </div>
+
+        {/* Success message toast */}
+        {successMessage && (
+          <div className="bg-[rgba(52,211,153,0.1)] text-[#34D399] border border-[rgba(52,211,153,0.2)] p-3.5 rounded-xl text-sm font-medium animate-float-up flex items-center justify-center gap-2">
+            <span>{successMessage}</span>
+          </div>
+        )}
 
         {/* Form inline */}
         {showForm && (
