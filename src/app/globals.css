@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+:root {
+  --respira-blue: #38BDF8;
+  --respira-green: #34D399;
+  --respira-bg: #07111A;
+  --respira-card: #0F1B24;
+  --respira-card2: #162230;
+  --respira-text: #F8FAFC;
+  --respira-muted: #A7B4C2;
+  --respira-amber: #FBBF24;
+  --respira-rose: #FB7185;
+  --respira-border: rgba(56, 189, 248, 0.15);
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+  height: 100%;
+  background-color: var(--respira-bg);
+  color: var(--respira-text);
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior: none;
+}
+
+/* Scrollbar custom */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(56, 189, 248, 0.2); border-radius: 2px; }
+
+/* Animations */
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 0.8; }
+  70% { transform: scale(1.4); opacity: 0; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+@keyframes breathe-in {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+@keyframes float-up {
+  0% { transform: translateY(8px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slide-in-bottom {
+  0% { transform: translateY(20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(56, 189, 248, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(56, 189, 248, 0.6), 0 0 60px rgba(52, 211, 153, 0.3); }
+}
+
+@keyframes counter-tick {
+  0% { transform: translateY(-4px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.animate-float-up { animation: float-up 0.4s ease-out forwards; }
+.animate-slide-in { animation: slide-in-bottom 0.5s ease-out forwards; }
+.animate-glow { animation: glow-pulse 3s ease-in-out infinite; }
+.animate-breathe { animation: breathe-in 4s ease-in-out infinite; }
+
+/* SOS pulse ring */
+.sos-pulse-ring {
+  animation: pulse-ring 2s ease-out infinite;
+}
+
+/* Glass card */
+.glass-card {
+  background: rgba(15, 27, 36, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--respira-border);
+  border-radius: 1.25rem;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, var(--respira-blue), var(--respira-green));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Bottom nav safe area */
+.pb-safe { padding-bottom: max(1rem, env(safe-area-inset-bottom)); }
+.mb-nav { margin-bottom: 80px; }
