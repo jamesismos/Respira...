@@ -20,7 +20,7 @@ export default function TriggerForm({ onSave, onCancel, resisted = true }: Trigg
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    onSave({ trigger, mood, intensity, resisted: didResist, notes: notes || undefined })
+    onSave({ trigger: trigger || 'outro', mood: mood || undefined, intensity, resisted: didResist, notes: notes || undefined })
   }
 
   return (
@@ -148,8 +148,7 @@ export default function TriggerForm({ onSave, onCancel, resisted = true }: Trigg
         )}
         <button
           type="submit"
-          disabled={!trigger}
-          className="flex-1 py-3 rounded-xl bg-gradient-to-r from-[#38BDF8] to-[#34D399] text-white font-semibold text-sm disabled:opacity-40 transition-opacity active:scale-[0.98]"
+          className="flex-1 py-3 rounded-xl bg-gradient-to-r from-[#38BDF8] to-[#34D399] text-white font-semibold text-sm transition-opacity active:scale-[0.98] cursor-pointer"
         >
           Salvar registro
         </button>
