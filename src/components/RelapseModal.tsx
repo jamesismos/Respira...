@@ -47,7 +47,7 @@ export default function RelapseModal({ currentStreakDays, currentStreakHours, on
 
   if (step === 'confirm') {
     return (
-      <div className="flex flex-col gap-6 animate-slide-in">
+      <div className="flex flex-col gap-6 animate-slide-in pb-4">
         {/* Header — sem vermelho, sem drama */}
         <div className="text-center">
           <div className="text-4xl mb-3">🌿</div>
@@ -86,7 +86,7 @@ export default function RelapseModal({ currentStreakDays, currentStreakHours, on
 
   if (step === 'form') {
     return (
-      <div className="flex flex-col gap-5 animate-slide-in">
+      <div className="flex flex-col gap-5 animate-slide-in pb-4">
         <h2 className="text-lg font-bold text-[#F8FAFC]">O que aconteceu?</h2>
 
         {/* O que aconteceu */}
