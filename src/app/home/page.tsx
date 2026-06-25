@@ -9,7 +9,6 @@ import {
   calculateMoneySaved,
   calculateCigarettesAvoided,
   formatCurrency,
-  calculateStats,
 } from '@/lib/stats'
 import { getBestStreakDays } from '@/lib/storage'
 import type { UserProfile, RelapseLog, CravingLog } from '@/types'

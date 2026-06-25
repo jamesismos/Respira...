@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 import { addCravingLog } from '@/lib/storage'
 import type { CravingLog } from '@/types'
 import TimerBreathing from '@/components/TimerBreathing'
@@ -23,7 +22,6 @@ const tips = [
 ]
 
 export default function SOSPage() {
-  const router = useRouter()
   const [phase, setPhase] = useState<SOSPhase>('breathing')
   const [completionPhrase] = useState(
     () => sosCompletionPhrases[Math.floor(Math.random() * sosCompletionPhrases.length)]

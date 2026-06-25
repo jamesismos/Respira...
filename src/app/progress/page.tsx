@@ -188,7 +188,7 @@ export default function ProgressPage() {
               <p className="text-[#A7B4C2] text-xs font-medium uppercase tracking-wide">Gatilhos mais frequentes</p>
             </div>
             <div className="flex flex-col gap-2.5">
-              {topTriggers.map((t, i) => (
+              {topTriggers.map(t => (
                 <div key={t.id} className="flex items-center gap-3">
                   <span className="text-lg">{t.emoji}</span>
                   <div className="flex-1">

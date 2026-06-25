@@ -32,7 +32,7 @@ export default function MotivationalPhrase({
         visible ? 'opacity-100' : 'opacity-0'
       } ${className}`}
     >
-      "{motivationalPhrases[index]}"
+      {`"${motivationalPhrases[index]}"`}
     </p>
   )
 }

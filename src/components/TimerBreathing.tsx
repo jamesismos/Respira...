@@ -30,7 +30,9 @@ export default function TimerBreathing({ totalSeconds = 180, onComplete }: Timer
   const [stepSecondsLeft, setStepSecondsLeft] = useState(breathingSteps[0].duration)
   const [isRunning, setIsRunning] = useState(true)
   const onCompleteRef = useRef(onComplete)
-  onCompleteRef.current = onComplete
+  useEffect(() => {
+    onCompleteRef.current = onComplete
+  }, [onComplete])
 
   const step = breathingSteps[stepIndex]
   const progress = 1 - secondsLeft / totalSeconds

@@ -9,7 +9,6 @@ import { quitReasons } from '@/data/triggers'
 import BottomNav from '@/components/BottomNav'
 import BackupControls from '@/components/BackupControls'
 import { Settings, Heart, AlertTriangle, ChevronRight, User } from 'lucide-react'
-import clsx from 'clsx'
 
 export default function SettingsPage() {
   const router = useRouter()
