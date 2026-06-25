@@ -91,7 +91,47 @@ export function completeOnboarding(): void {
 export function addCravingLog(log: CravingLog): void {
   const data = loadAppData()
   const list = Array.isArray(data.cravingLogs) ? data.cravingLogs : []
-  saveAppData({ ...data, cravingLogs: [log, ...list] })
+  
+  let updatedProfile = data.profile
+  let updatedRelapseLogs = data.relapseLogs
+
+  if (!log.resisted && data.profile) {
+    // Reset streak!
+    updatedProfile = {
+      ...data.profile,
+      lastSmoked: log.timestamp,
+    }
+
+    // Calcular o streak anterior em segundos
+    const lastSmokedTime = new Date(data.profile.lastSmoked).getTime()
+    const logTime = new Date(log.timestamp).getTime()
+    const secs = Math.max(0, Math.floor((logTime - lastSmokedTime) / 1000))
+    const currentDays = Math.floor(secs / 86400)
+    const currentHours = Math.floor((secs % 86400) / 3600)
+
+    const alreadyHasRelapse = data.relapseLogs.some(r => r.timestamp === log.timestamp)
+    if (!alreadyHasRelapse) {
+      const relapseLog: RelapseLog = {
+        id: `relapse-from-craving-${Date.now()}`,
+        timestamp: log.timestamp,
+        previousStreakDays: currentDays,
+        previousStreakHours: currentHours,
+        whatHappened: log.notes || `Registrado via Diário. Gatilho: ${log.trigger}`,
+        mood: log.mood || 'outro',
+        where: 'outro',
+        wasAutomatic: true,
+        whatCouldHelp: '',
+      }
+      updatedRelapseLogs = [relapseLog, ...updatedRelapseLogs]
+    }
+  }
+
+  saveAppData({
+    ...data,
+    profile: updatedProfile,
+    cravingLogs: [log, ...list],
+    relapseLogs: updatedRelapseLogs,
+  })
 }
 
 export function loadCravingLogs(): CravingLog[] {

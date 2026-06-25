@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
-import { loadAppData, addRelapseLog } from '@/lib/storage'
+import { loadAppData, addRelapseLog, addCravingLog } from '@/lib/storage'
 import {
   calculateSmokeFreeSeconds,
   formatSmokeFreeTime,
@@ -12,7 +12,7 @@ import {
   calculateStats,
 } from '@/lib/stats'
 import { getBestStreakDays } from '@/lib/storage'
-import type { UserProfile, RelapseLog } from '@/types'
+import type { UserProfile, RelapseLog, CravingLog } from '@/types'
 import StatCard from '@/components/StatCard'
 import SOSButton from '@/components/SOSButton'
 import BottomNav from '@/components/BottomNav'
@@ -70,18 +70,39 @@ export default function HomePage() {
     whatCouldHelp: string
   }) {
     if (!profile) return
+    const nowIso = new Date().toISOString()
     const currentSecs = calculateSmokeFreeSeconds(profile.lastSmoked)
     const currentDays = Math.floor(currentSecs / 86400)
     const currentHours = Math.floor((currentSecs % 86400) / 3600)
 
     const log: RelapseLog = {
       id: `relapse-${Date.now()}`,
-      timestamp: new Date().toISOString(),
+      timestamp: nowIso,
       previousStreakDays: currentDays,
       previousStreakHours: currentHours,
       ...formData,
     }
-    addRelapseLog(log, new Date().toISOString())
+    addRelapseLog(log, nowIso)
+
+    // Mapeia o local (where) para o gatilho (trigger) mais próximo no Diário
+    let mappedTrigger = 'outro'
+    if (formData.where === 'trabalho') mappedTrigger = 'trabalho'
+    else if (formData.where === 'social') mappedTrigger = 'social'
+    else if (formData.where === 'bar') mappedTrigger = 'alcool'
+    else if (formData.where === 'carro') mappedTrigger = 'dirigindo'
+
+    // Salva a recaída também como um registro no Diário de Gatilhos
+    const diaryEntry: CravingLog = {
+      id: `craving-relapse-${Date.now()}`,
+      timestamp: nowIso,
+      trigger: mappedTrigger,
+      intensity: 5,
+      resisted: false,
+      mood: formData.mood,
+      notes: `${formData.whatHappened}${formData.whatCouldHelp ? `\n\nO que pode ajudar na próxima vez: ${formData.whatCouldHelp}` : ''}`,
+    }
+    addCravingLog(diaryEntry)
+
     setShowRelapseModal(false)
     refreshStats()
   }
