@@ -6,6 +6,7 @@ import type { CravingLog } from '@/types'
 import TriggerForm from '@/components/TriggerForm'
 import BottomNav from '@/components/BottomNav'
 import { defaultTriggers, moodOptions } from '@/data/triggers'
+import DiaryDetailModal from '@/components/DiaryDetailModal'
 import { Plus, BookOpen, CigaretteOff, Cigarette } from 'lucide-react'
 import clsx from 'clsx'
 
@@ -13,6 +14,7 @@ export default function TriggersPage() {
   const [logs, setLogs] = useState<CravingLog[]>([])
   const [showForm, setShowForm] = useState(false)
   const [successMessage, setSuccessMessage] = useState<string | null>(null)
+  const [selectedLog, setSelectedLog] = useState<CravingLog | null>(null)
 
   function reload() {
     const data = loadAppData()
@@ -117,10 +119,11 @@ export default function TriggersPage() {
         {logs.length > 0 && (
           <div className="flex flex-col gap-3">
             {logs.map(log => (
-              <div
+              <button
                 key={log.id}
+                onClick={() => setSelectedLog(log)}
                 className={clsx(
-                  'glass-card p-4 flex gap-3',
+                  'glass-card p-4 flex gap-3 w-full text-left cursor-pointer active:scale-[0.98] transition-transform',
                   log.resisted
                     ? 'border-[rgba(52,211,153,0.15)]'
                     : 'border-[rgba(251,113,133,0.15)]'
@@ -158,11 +161,15 @@ export default function TriggersPage() {
                     <p className="text-[#A7B4C2] text-xs mt-1.5 line-clamp-2">{log.notes}</p>
                   )}
                 </div>
-              </div>
+              </button>
             ))}
           </div>
         )}
       </div>
+
+      {selectedLog && (
+        <DiaryDetailModal log={selectedLog} onClose={() => setSelectedLog(null)} />
+      )}
 
       <BottomNav />
     </div>

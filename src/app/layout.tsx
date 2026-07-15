@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
+import MilestoneToast from '@/components/MilestoneToast'
 import './globals.css'
 
 const inter = Inter({
@@ -45,6 +46,7 @@ export default function RootLayout({
         <meta name="mobile-web-app-capable" content="yes" />
       </head>
       <body className="bg-[#07111A] text-[#F8FAFC] font-sans antialiased min-h-screen">
+        <MilestoneToast />
         {children}
       </body>
     </html>

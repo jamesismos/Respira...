@@ -50,6 +50,7 @@ export interface AppSettings {
   motivationalName?: string
   notificationsEnabled?: boolean
   hasCompletedOnboarding: boolean
+  lastNotifiedMilestone?: number
 }
 
 export interface DailyLog {
