@@ -41,12 +41,13 @@ export default function RootPage() {
 
           <div className="mt-6 space-y-4 text-base leading-7 text-[#A7B4C2] sm:text-lg">
             <p>
-              O Respira foi criado com um propósito específico, mas a solução desenvolvida
-              não atendeu ao objetivo esperado e não foi aprovada pela cliente.
+              O Respira nasceu de um propósito pessoal: criar uma ferramenta que pudesse ajudar
+              alguém importante a parar de fumar e viver melhor.
             </p>
             <p>
-              Como o resultado não foi aprovado, o desenvolvimento será encerrado. O projeto
-              não receberá novas funcionalidades nem manutenção contínua.
+              Foi uma forma de transformar cuidado em algo concreto. A solução, porém, não
+              encontrou o valor que eu esperava que tivesse para a pessoa a quem se destinava,
+              e o projeto foi encerrado.
             </p>
           </div>
 
@@ -73,8 +74,7 @@ export default function RootPage() {
             <div>
               <h2 className="font-medium text-[#F8FAFC]">Registro de encerramento</h2>
               <p className="mt-1 text-sm leading-6 text-[#A7B4C2]">
-                O Respira permanece como registro de um projeto que foi desenvolvido, apresentado
-                e não aprovado pela cliente.
+                Esta página permanece como registro do trabalho desenvolvido e da intenção que o originou.
               </p>
             </div>
           </div>
