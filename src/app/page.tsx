@@ -41,8 +41,8 @@ export default function RootPage() {
 
           <div className="mt-6 space-y-4 text-base leading-7 text-[#A7B4C2] sm:text-lg">
             <p>
-              O Respira foi desenvolvido para atender a uma necessidade específica, mas a
-              cliente não aprovou o projeto.
+              O Respira foi criado com um propósito específico, mas a solução desenvolvida
+              não atendeu ao objetivo esperado e não foi aprovada pela cliente.
             </p>
             <p>
               Como o resultado não foi aprovado, o desenvolvimento será encerrado. O projeto
