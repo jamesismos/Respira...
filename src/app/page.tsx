@@ -80,9 +80,17 @@ export default function RootPage() {
           </div>
         </div>
 
-        <footer className="mt-6 flex flex-col gap-2 text-xs text-[#718096] sm:flex-row sm:items-center sm:justify-between">
+        <footer className="mt-6 flex flex-col gap-3 text-xs text-[#718096] sm:flex-row sm:items-center sm:justify-between">
           <span>Respira · Projeto independente</span>
-          <span>Desenvolvimento encerrado</span>
+          <a
+            href="https://www.instagram.com/jamesismos/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-fit text-[#A7B4C2] transition-colors hover:text-[#38BDF8]"
+            aria-label="Instagram de Jamesismos, abre em nova aba"
+          >
+            @jamesismos
+          </a>
         </footer>
       </section>
     </main>
