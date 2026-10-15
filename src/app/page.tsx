@@ -45,9 +45,14 @@ export default function RootPage() {
               alguém importante a parar de fumar e viver melhor.
             </p>
             <p>
-              Foi uma forma de transformar cuidado em algo concreto. A solução, porém, não
-              encontrou o valor que eu esperava que tivesse para a pessoa a quem se destinava,
-              e o projeto foi encerrado.
+              Você buscou validação constante. Você conseguiu. Mas é temporário, como sempre é.
+            </p>
+            <p>
+              Estar ao lado de alguém por aquilo que essa pessoa oferece e estar ao lado de alguém
+              simplesmente por quem ela é são coisas diferentes.
+            </p>
+            <p>
+              Eu tentei lhe oferecer um amor que você talvez nunca tenha conhecido. Lamento.
             </p>
           </div>
 
