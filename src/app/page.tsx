@@ -62,12 +62,14 @@ export default function RootPage() {
             <p>
               Eu tentei lhe oferecer um amor que talvez você nunca tenha conhecido. Lamento.
             </p>
-            <p>
+            <p className="flex flex-wrap items-center gap-2">
+              <span className="text-xs font-medium uppercase tracking-[0.16em] text-[#718096]">Leitura</span>
+              <span aria-hidden="true" className="text-[#38BDF8]/60">›</span>
               <a
                 href="https://jamesismos.wordpress.com/2026/10/14/caju/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex w-fit items-center gap-2 rounded-lg border border-[#38BDF8]/30 bg-[#38BDF8]/[0.07] px-3 py-1.5 text-[#7DD3FC] underline decoration-[#38BDF8]/70 underline-offset-4 shadow-[0_0_18px_rgba(56,189,248,0.16)] transition-all duration-200 hover:border-[#38BDF8]/60 hover:bg-[#38BDF8]/[0.12] hover:text-white hover:shadow-[0_0_26px_rgba(56,189,248,0.34)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#38BDF8] focus-visible:ring-offset-2 focus-visible:ring-offset-[#07111A]"
+                className="group animate-caju-glow inline-flex w-fit items-center gap-2 rounded-lg border border-[#38BDF8]/30 bg-[#38BDF8]/[0.07] px-3 py-1.5 text-[#7DD3FC] underline decoration-[#38BDF8]/70 underline-offset-4 shadow-[0_0_18px_rgba(56,189,248,0.16)] transition-all duration-200 hover:border-[#38BDF8]/60 hover:bg-[#38BDF8]/[0.12] hover:text-white hover:shadow-[0_0_26px_rgba(56,189,248,0.34)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#38BDF8] focus-visible:ring-offset-2 focus-visible:ring-offset-[#07111A]"
               >
                 <span>Um suco de caju amargo.</span>
                 <svg
