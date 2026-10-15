@@ -67,9 +67,10 @@ export default function RootPage() {
                 href="https://jamesismos.wordpress.com/2026/10/14/caju/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#38BDF8] underline decoration-[#38BDF8]/50 underline-offset-4 transition-colors hover:text-[#7DD3FC]"
+                className="inline-flex w-fit items-center gap-2 text-[#38BDF8] underline decoration-[#38BDF8]/50 underline-offset-4 transition-colors hover:text-[#7DD3FC]"
               >
-                Um suco de caju amargo.
+                <span>Um suco de caju amargo.</span>
+                <span aria-hidden="true" className="text-sm no-underline">🖱️</span>
               </a>
             </p>
           </div>
