@@ -62,6 +62,16 @@ export default function RootPage() {
             <p>
               Eu tentei lhe oferecer um amor que talvez você nunca tenha conhecido. Lamento.
             </p>
+            <p>
+              <a
+                href="https://jamesismos.wordpress.com/2026/10/14/caju/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#38BDF8] underline decoration-[#38BDF8]/50 underline-offset-4 transition-colors hover:text-[#7DD3FC]"
+              >
+                Um suco de caju amargo.
+              </a>
+            </p>
           </div>
 
           <div className="my-8 h-px bg-white/10" />
