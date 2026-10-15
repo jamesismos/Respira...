@@ -45,14 +45,19 @@ export default function RootPage() {
               alguém importante a parar de fumar e viver melhor.
             </p>
             <p>
-              Você buscou validação constante. Você conseguiu. Mas é temporário, como sempre é.
+              Foi uma forma de transformar cuidado em algo concreto. A solução, porém, não
+              encontrou o valor que eu esperava que tivesse para a pessoa a quem se destinava,
+              e o projeto foi encerrado.
             </p>
             <p>
-              Estar ao lado de alguém por aquilo que essa pessoa oferece e estar ao lado de alguém
-              simplesmente por quem ela é são coisas diferentes.
+              Você buscou validação constante. Você conseguiu. Mas ela é temporária, como sempre é.
             </p>
             <p>
-              Eu tentei lhe oferecer um amor que você talvez nunca tenha conhecido. Lamento.
+              Estar ao lado de alguém pelo que essa pessoa oferece e estar ao lado dela simplesmente
+              por quem ela é são coisas diferentes.
+            </p>
+            <p>
+              Eu tentei lhe oferecer um amor que talvez você nunca tenha conhecido. Lamento.
             </p>
           </div>
 
