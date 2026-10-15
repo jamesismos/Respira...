@@ -67,10 +67,22 @@ export default function RootPage() {
                 href="https://jamesismos.wordpress.com/2026/10/14/caju/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex w-fit items-center gap-2 text-[#38BDF8] underline decoration-[#38BDF8]/50 underline-offset-4 transition-colors hover:text-[#7DD3FC]"
+                className="group inline-flex w-fit items-center gap-2 rounded-lg border border-[#38BDF8]/30 bg-[#38BDF8]/[0.07] px-3 py-1.5 text-[#7DD3FC] underline decoration-[#38BDF8]/70 underline-offset-4 shadow-[0_0_18px_rgba(56,189,248,0.16)] transition-all duration-200 hover:border-[#38BDF8]/60 hover:bg-[#38BDF8]/[0.12] hover:text-white hover:shadow-[0_0_26px_rgba(56,189,248,0.34)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#38BDF8] focus-visible:ring-offset-2 focus-visible:ring-offset-[#07111A]"
               >
                 <span>Um suco de caju amargo.</span>
-                <span aria-hidden="true" className="text-sm no-underline">🖱️</span>
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="h-4 w-4 shrink-0 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                >
+                  <path d="M7 17 17 7" />
+                  <path d="M8 7h9v9" />
+                </svg>
               </a>
             </p>
           </div>
