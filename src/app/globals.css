@@ -61,6 +61,17 @@ body {
   50% { box-shadow: 0 0 40px rgba(56, 189, 248, 0.6), 0 0 60px rgba(52, 211, 153, 0.3); }
 }
 
+@keyframes caju-glow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.10), 0 0 20px rgba(56, 189, 248, 0.06);
+    border-color: rgba(56, 189, 248, 0.28);
+  }
+  50% {
+    box-shadow: 0 0 18px rgba(56, 189, 248, 0.26), 0 0 30px rgba(56, 189, 248, 0.10);
+    border-color: rgba(56, 189, 248, 0.48);
+  }
+}
+
 @keyframes counter-tick {
   0% { transform: translateY(-4px); opacity: 0; }
   100% { transform: translateY(0); opacity: 1; }
@@ -70,6 +81,18 @@ body {
 .animate-slide-in { animation: slide-in-bottom 0.5s ease-out forwards; }
 .animate-glow { animation: glow-pulse 3s ease-in-out infinite; }
 .animate-breathe { animation: breathe-in 4s ease-in-out infinite; }
+.animate-caju-glow { animation: caju-glow 3.2s ease-in-out infinite; }
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .animate-caju-glow { animation: none; }
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
 
 /* SOS pulse ring */
 .sos-pulse-ring {
