@@ -53,6 +53,9 @@ export default function RootPage() {
               Você buscou validação constante. Você conseguiu. Mas ela é temporária, como sempre é.
             </p>
             <p>
+              Venda-se à validação dos outros; cedo ou tarde, sentirá o fel do vazio que ela não consegue preencher.
+            </p>
+            <p>
               Estar ao lado de alguém pelo que essa pessoa oferece e estar ao lado dela simplesmente
               por quem ela é são coisas diferentes.
             </p>
