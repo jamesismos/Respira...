@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { loadAppData, addCravingLog } from '@/lib/storage'
+import { loadAppData, addCravingLog, getStorageError } from '@/lib/storage'
 import type { CravingLog } from '@/types'
 import TriggerForm from '@/components/TriggerForm'
 import BottomNav from '@/components/BottomNav'
@@ -14,6 +14,7 @@ export default function TriggersPage() {
   const [logs, setLogs] = useState<CravingLog[]>([])
   const [showForm, setShowForm] = useState(false)
   const [successMessage, setSuccessMessage] = useState<string | null>(null)
+  const [saveError, setSaveError] = useState<string | null>(null)
   const [selectedLog, setSelectedLog] = useState<CravingLog | null>(null)
 
   function reload() {
@@ -24,15 +25,19 @@ export default function TriggersPage() {
   useEffect(() => { reload() }, [])
 
   function handleSave(log: Omit<CravingLog, 'id' | 'timestamp'>) {
+    setSaveError(null)
     const entry: CravingLog = {
       ...log,
-      id: `craving-${Date.now()}`,
+      id: 'craving-' + Date.now(),
       timestamp: new Date().toISOString(),
     }
-    addCravingLog(entry)
+    if (!addCravingLog(entry)) {
+      setSaveError(getStorageError() || 'Não foi possível salvar o registro. Tente novamente.')
+      return
+    }
     setShowForm(false)
     setSuccessMessage('Gatilho registrado com sucesso! 💚')
-    setTimeout(() => setSuccessMessage(null), 3000)
+    window.setTimeout(() => setSuccessMessage(null), 3000)
     reload()
   }
 
@@ -76,6 +81,8 @@ export default function TriggersPage() {
             <Plus size={20} className="text-white" />
           </button>
         </div>
+
+        {saveError && <p role="alert" className="rounded-xl border border-[#FB7185]/30 bg-[#FB7185]/10 p-3 text-sm text-[#FDA4AF]">{saveError}</p>}
 
         {/* Success message toast */}
         {successMessage && (
