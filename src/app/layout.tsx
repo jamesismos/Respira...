@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next'
+import { Analytics } from '@vercel/analytics/next'
 import { Inter } from 'next/font/google'
 import NotificationScheduler from '@/components/NotificationScheduler'
 import StorageRecoveryGuard from '@/components/StorageRecoveryGuard'
@@ -25,12 +26,12 @@ export const metadata: Metadata = {
     locale: 'pt_BR',
     siteName: 'Respira',
     title: 'Respira — Uma vontade de cada vez',
-    description: 'Apoio prático para atravessar a vontade de fumar, acompanhar seu progresso e aprender com os gatilhos. Sem conta e sem coleta de dados.',
+    description: 'Apoio prático para atravessar a vontade de fumar, acompanhar seu progresso e aprender com os gatilhos. Os registros pessoais permanecem no dispositivo.',
   },
   twitter: {
     card: 'summary',
     title: 'Respira — Uma vontade de cada vez',
-    description: 'Um app gratuito e privado para apoiar quem quer parar de fumar, sem culpa e sem coleta de dados.',
+    description: 'Um app gratuito para apoiar quem quer parar de fumar. Os registros pessoais permanecem no dispositivo.',
   },
   manifest: '/manifest.json',
   icons: {
@@ -65,6 +66,7 @@ export default function RootLayout({
         <StorageRecoveryGuard />
         <NotificationScheduler />
         {children}
+        <Analytics />
       </body>
     </html>
   )
