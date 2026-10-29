@@ -39,7 +39,12 @@ export default function SettingsPage() {
     const data = loadAppData()
     if (data.profile) {
       setProfile(data.profile)
-      populateForm(data.profile)
+      setCigs(String(data.profile.cigarettesPerDay))
+      setPrice(String(data.profile.packPrice))
+      setCigsPerPack(String(data.profile.cigarettesPerPack))
+      setLastSmoked(formatDateTimeLocal(new Date(data.profile.lastSmoked)))
+      setReason(data.profile.quitReason)
+      setSelectedTriggers(data.profile.triggers || [])
     }
   }, [])
 
