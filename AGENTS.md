@@ -124,6 +124,5 @@ AppData         ← estrutura completa para backup
 | `/sos` | SOS Vontade (core feature) |
 | `/triggers` | Diário de gatilhos |
 | `/progress` | Progresso |
-
 | `/settings` | Configurações |
 | `/settings/donate` | Apoiar o projeto (discreto) |
