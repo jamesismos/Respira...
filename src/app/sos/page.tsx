@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { addCravingLog } from '@/lib/storage'
+import { addCravingLog, getStorageError } from '@/lib/storage'
 import type { CravingLog } from '@/types'
 import TimerBreathing from '@/components/TimerBreathing'
 import MotivationalPhrase from '@/components/MotivationalPhrase'
@@ -23,6 +23,8 @@ const tips = [
 
 export default function SOSPage() {
   const [phase, setPhase] = useState<SOSPhase>('breathing')
+  const [outcome, setOutcome] = useState<'resisted' | 'smoked'>('resisted')
+  const [saveError, setSaveError] = useState<string | null>(null)
   const [completionPhrase] = useState(
     () => sosCompletionPhrases[Math.floor(Math.random() * sosCompletionPhrases.length)]
   )
@@ -32,26 +34,35 @@ export default function SOSPage() {
   }
 
   function handleSaveTrigger(log: Omit<CravingLog, 'id' | 'timestamp'>) {
+    setSaveError(null)
     const entry: CravingLog = {
       ...log,
-      id: `craving-${Date.now()}`,
+      id: 'craving-' + Date.now(),
       timestamp: new Date().toISOString(),
-      resisted: true,
     }
-    addCravingLog(entry)
+    if (!addCravingLog(entry)) {
+      setSaveError(getStorageError() || 'Não foi possível salvar o registro. Tente novamente.')
+      return
+    }
+    setOutcome(entry.resisted ? 'resisted' : 'smoked')
     setPhase('done')
   }
 
   function handleSkipLog() {
-    // Still counts as resisted — just no details
+    // Pular os detalhes neste fluxo significa que a vontade foi atravessada.
+    setSaveError(null)
     const entry: CravingLog = {
-      id: `craving-${Date.now()}`,
+      id: 'craving-' + Date.now(),
       timestamp: new Date().toISOString(),
       trigger: 'outro',
       intensity: 3,
       resisted: true,
     }
-    addCravingLog(entry)
+    if (!addCravingLog(entry)) {
+      setSaveError(getStorageError() || 'Não foi possível salvar o registro. Tente novamente.')
+      return
+    }
+    setOutcome('resisted')
     setPhase('done')
   }
 
@@ -71,10 +82,12 @@ export default function SOSPage() {
               {phase === 'phrase' && 'Você está atravessando.'}
               {phase === 'tips' && 'Muda o ambiente.'}
               {phase === 'log' && 'O que ativou isso?'}
-              {phase === 'done' && 'Você conseguiu. 💚'}
+              {phase === 'done' && (outcome === 'resisted' ? 'Você conseguiu. 💚' : 'Registro concluído sem julgamento.')}
             </p>
           </div>
         </div>
+
+        {saveError && <p role="alert" className="mx-5 mb-3 rounded-xl border border-[#FB7185]/30 bg-[#FB7185]/10 p-3 text-sm text-[#FDA4AF]">{saveError}</p>}
 
         {/* ── FASE: BREATHING ── */}
         {phase === 'breathing' && (
@@ -184,7 +197,7 @@ export default function SOSPage() {
             <TriggerForm
               resisted={true}
               onSave={handleSaveTrigger}
-              onCancel={handleSkipLog}
+              onCancel={() => { setSaveError(null); setPhase('tips') }}
             />
           </div>
         )}
@@ -202,11 +215,11 @@ export default function SOSPage() {
             </div>
 
             <div>
-              <h2 className="text-3xl font-bold text-[#F8FAFC]">{completionPhrase}</h2>
+              <h2 className="text-3xl font-bold text-[#F8FAFC]">{outcome === 'resisted' ? completionPhrase : 'Você registrou o que aconteceu.'}</h2>
               <p className="text-[#A7B4C2] mt-3 leading-relaxed text-sm">
-                Mais uma vontade atravessada.
-                <br />
-                Esse momento é seu.
+                {outcome === 'resisted'
+                  ? <>Mais uma vontade atravessada.<br />Esse momento é seu.</>
+                  : <>Uma recaída não apaga seu esforço.<br />Use esse registro para entender o gatilho e recomeçar sem culpa.</>}
               </p>
             </div>
 

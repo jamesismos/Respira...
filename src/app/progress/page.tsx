@@ -11,6 +11,7 @@ import {
 } from '@/lib/stats'
 import type { UserProfile, CravingLog } from '@/types'
 import { defaultTriggers } from '@/data/triggers'
+import { localDateKey } from '@/lib/dates'
 import BottomNav from '@/components/BottomNav'
 import StatCard from '@/components/StatCard'
 import { BarChart2, Trophy, TrendingUp, Zap, Target } from 'lucide-react'
@@ -69,8 +70,8 @@ export default function ProgressPage() {
     for (let i = 13; i >= 0; i--) {
       const d = new Date()
       d.setDate(d.getDate() - i)
-      const key = d.toISOString().split('T')[0]
-      const dayLogs = data.cravingLogs.filter((l: CravingLog) => l.timestamp.startsWith(key))
+      const key = localDateKey(d)
+      const dayLogs = data.cravingLogs.filter((l: CravingLog) => localDateKey(new Date(l.timestamp)) === key)
       days14.push({
         label: d.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' }),
         resisted: dayLogs.filter((l: CravingLog) => l.resisted).length,

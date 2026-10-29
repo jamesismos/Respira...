@@ -1,7 +1,7 @@
 {
   "name": "Respira",
   "short_name": "Respira",
-  "description": "Uma vontade de cada vez. App local para parar de fumar.",
+  "description": "App gratuito e privado para apoiar quem quer parar de fumar, registrar gatilhos e acompanhar o progresso.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#07111A",
@@ -21,14 +21,20 @@
       "purpose": "any maskable"
     }
   ],
-  "categories": ["health", "lifestyle"],
+  "categories": [
+    "health",
+    "lifestyle"
+  ],
   "lang": "pt-BR",
   "id": "/",
   "scope": "/",
   "dir": "ltr",
   "prefer_related_applications": false,
   "related_applications": [],
-  "display_override": ["standalone", "window-controls-overlay"],
+  "display_override": [
+    "standalone",
+    "window-controls-overlay"
+  ],
   "launch_handler": {
     "client_mode": "focus-existing"
   },
@@ -58,22 +64,6 @@
           "type": "image/png"
         }
       ]
-    }
-  ],
-  "screenshots": [
-    {
-      "src": "/screenshots/screenshot1.png",
-      "sizes": "1254x1254",
-      "type": "image/png",
-      "form_factor": "narrow",
-      "label": "Tela Inicial do Respira"
-    },
-    {
-      "src": "/screenshots/screenshot2.png",
-      "sizes": "1254x1254",
-      "type": "image/png",
-      "form_factor": "wide",
-      "label": "Painel de Progresso do Respira"
     }
   ]
 }

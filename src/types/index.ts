@@ -69,6 +69,7 @@ export interface AppData {
   relapseLogs: RelapseLog[]
   dailyLogs: DailyLog[]
   version: string
+  schemaVersion: number
   exportedAt?: string
 }
 

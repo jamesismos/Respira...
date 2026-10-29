@@ -4,6 +4,8 @@
 
 O Respira é um aplicativo gratuito, open source e local-first para apoiar quem quer parar de fumar. Foi criado por James Oliveira com foco no momento em que a vontade aparece: oferecer uma pausa prática, registrar gatilhos e acompanhar o progresso sem culpa.
 
+**Acesse o app:** [respira-nine.vercel.app](https://respira-nine.vercel.app)
+
 ## Funcionalidades
 
 - Contador de tempo desde o último cigarro.
@@ -12,7 +14,9 @@ O Respira é um aplicativo gratuito, open source e local-first para apoiar quem 
 - Diário de gatilhos, humor e intensidade da vontade.
 - Registro de recaídas sem apagar o histórico anterior.
 - Progresso, sequências e marcos.
-- Backup e restauração dos dados em JSON.
+- Backup e restauração dos dados em JSON, com validação e migração de esquema.
+- Edição de todos os dados do perfil que afetam os cálculos e os gatilhos.
+- Links para apoio profissional gratuito pelo SUS, INCA e Secretaria de Saúde de Minas Gerais.
 - Lembrete diário opcional por notificação do navegador.
 - PWA instalável, com suporte offline conforme os recursos já armazenados pelo navegador.
 
@@ -42,10 +46,21 @@ Verificações:
 ```bash
 npm run lint
 npx tsc --noEmit
+npm test
 npm run build
 ```
 
 Abra http://localhost:3000. Para testar a instalação PWA e notificações em outro dispositivo, use uma origem HTTPS ou localhost e conceda permissão apenas se desejar.
+
+## Testes e qualidade
+
+A suíte automatizada cobre conversão de datas locais, cálculos de progresso, persistência e migração, registro de recaídas, onboarding, fluxo SOS, importação de backup e metadados básicos do PWA. O CI executa lint, TypeScript, testes e build.
+
+A instalação e o comportamento offline ainda devem ser verificados em dispositivos reais antes de cada release; o suporte a notificações varia por navegador e sistema operacional.
+
+## Apoio profissional
+
+O Respira é um complemento, não um substituto de cuidado clínico. O SUS oferece tratamento para cessação do tabagismo. Consulte [Como parar de fumar — INCA](https://www.gov.br/inca/pt-br/assuntos/causas-e-prevencao-do-cancer/tabagismo/como-parar-de-fumar) ou, em Minas Gerais, [Tratamento do tabagismo — SES-MG](https://www.saude.mg.gov.br/vidasaudavel/tabagismo/). O Disque Saúde 136 pode orientar sobre o acesso ao tratamento.
 
 ## Princípios do projeto
 
