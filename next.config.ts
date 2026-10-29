@@ -1,17 +1,18 @@
 import type { NextConfig } from "next";
-// @ts-expect-error — next-pwa types
-import withPWA from "next-pwa";
+import withSerwistInit from "@serwist/next";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   turbopack: {},
 };
 
-export default withPWA({
-  dest: "public",
-  register: true,
-  skipWaiting: true,
+const withSerwist = withSerwistInit({
+  swSrc: "src/app/sw.ts",
+  swDest: "public/sw.js",
   disable: process.env.NODE_ENV === "development",
-  importScripts: ['/sw-custom.js'],
-  clientsClaim: true,
-})(nextConfig);
+  additionalPrecacheEntries: [
+    { url: "/offline", revision: "respira-offline-v1" },
+  ],
+});
+
+export default withSerwist(nextConfig);
