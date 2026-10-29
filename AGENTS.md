@@ -8,7 +8,7 @@
 ## Sobre o projeto
 
 Respira é uma PWA Next.js 16 + TypeScript + TailwindCSS.
-App local para parar de fumar. Sem backend. Sem login. Sem analytics.
+App local para parar de fumar. Sem backend de dados do usuário. Sem login. Analytics de navegação limitado ao Vercel Web Analytics, sem eventos personalizados e sem envio de dados de tabagismo.
 
 ---
 
@@ -49,9 +49,9 @@ public/
 
 ## Regras obrigatórias para agentes
 
-1. **Não criar chamadas de API externa.** O app é local-first.
+1. **Não criar integrações externas além do Vercel Web Analytics aprovado.** O app é local-first; nunca enviar perfil, gatilhos, recaídas, humor, progresso ou conteúdo do armazenamento local para serviços externos.
 2. **Não instalar Firebase, Supabase, Auth.js ou similares.**
-3. **Não instalar analytics ou tracking** de nenhum tipo.
+3. **Não instalar outros analytics ou tracking.** O único permitido é `@vercel/analytics`, limitado a visualizações de página; não adicionar eventos personalizados.
 4. **Não mostrar doação fora das Configurações.**
    - Proibido: Home, SOS, Recaída, Onboarding, qualquer modal de momento vulnerável.
    - Permitido: `/settings` (rodapé discreto) e `/settings/donate`.
@@ -96,6 +96,7 @@ style: ajusta espaçamento da home no mobile
 | Estilo | TailwindCSS |
 | Dados | localStorage → `src/lib/storage.ts` |
 | PWA | manifest.json + @serwist/next + Serwist worker em src/app/sw.ts |
+| Métricas | Vercel Web Analytics (`@vercel/analytics`), apenas visualizações de página |
 | Ícones | lucide-react |
 | QR Code | qrcode.react |
 | Backend | ❌ nenhum |
