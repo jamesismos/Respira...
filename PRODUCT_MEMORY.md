@@ -48,7 +48,7 @@ Qualquer feature, copia ou decisão de produto deve ser avaliada contra esses qu
 - Sem paywall, sem premium, sem tier.
 - Open source — qualquer pessoa pode auditar o código.
 - Interface acessível: botões grandes, contraste adequado, linguagem simples.
-- Funciona em qualquer celular, offline, sem internet.
+- PWA instalável; o acesso offline depende dos recursos e rotas já armazenados no navegador.
 
 ---
 
@@ -123,7 +123,7 @@ Bateu vontade
 ↓
 Respira 3 minutos (timer)
 ↓
-Respiração guiada (inspira 4s → segura 4s → expira 4s)
+Respiração guiada (inspira 4s → segura 4s → expira 6s → pausa 2s)
 ↓
 Frase pessoal
 ↓
