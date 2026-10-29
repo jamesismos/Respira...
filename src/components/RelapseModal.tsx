@@ -15,7 +15,7 @@ interface RelapseFormData {
 interface RelapseModalProps {
   currentStreakDays: number
   currentStreakHours: number
-  onConfirm: (data: RelapseFormData) => void
+  onConfirm: (data: RelapseFormData) => boolean
   onCancel: () => void
 }
 
@@ -41,8 +41,8 @@ export default function RelapseModal({ currentStreakDays, currentStreakHours, on
 
   function handleConfirm() {
     if (!data.whatHappened || !data.mood || !data.where) return
-    onConfirm(data)
-    setStep('done')
+    const saved = onConfirm(data)
+    if (saved) setStep('done')
   }
 
   if (step === 'confirm') {
