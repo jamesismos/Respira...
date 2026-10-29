@@ -14,7 +14,7 @@ export interface BackupResult {
 export function exportBackup(): BackupResult {
   try {
     const data = loadAppData()
-    if (isStorageRecoveryRequired() || getStorageError()) {
+    if (isStorageRecoveryRequired()) {
       return { success: false, message: getStorageError() || 'Os dados locais precisam ser recuperados antes da exportação.' }
     }
 
