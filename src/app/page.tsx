@@ -2,15 +2,16 @@
 
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { loadAppData } from '@/lib/storage'
+import { isStorageRecoveryRequired, loadAppData } from '@/lib/storage'
 
 export default function RootPage() {
   const router = useRouter()
 
   useEffect(() => {
     const data = loadAppData()
-    const destination =
-      data.settings.hasCompletedOnboarding && data.profile ? '/home' : '/onboarding'
+    const destination = isStorageRecoveryRequired()
+      ? '/recovery'
+      : data.settings.hasCompletedOnboarding && data.profile ? '/home' : '/onboarding'
     router.replace(destination)
   }, [router])
 
