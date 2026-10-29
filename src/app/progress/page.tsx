@@ -92,13 +92,13 @@ export default function ProgressPage() {
       <div className="max-w-md mx-auto w-full px-5 pt-10 flex flex-col gap-6">
 
         {/* Header */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 animate-float-up">
           <BarChart2 size={20} className="text-[#38BDF8]" />
           <h1 className="text-xl font-bold text-[#F8FAFC]">Progresso</h1>
         </div>
 
         {/* Sequência */}
-        <div className="glass-card p-5 flex justify-between items-center border-[rgba(56,189,248,0.25)]">
+        <div className="glass-card p-5 flex justify-between items-center border-[rgba(56,189,248,0.25)] animate-float-up" style={{ animationDelay: '0.05s' }}>
           <div>
             <p className="text-[#A7B4C2] text-xs font-medium uppercase tracking-wide">Sequência atual</p>
             <p className="text-4xl font-black gradient-text">{stats.currentStreak}</p>
@@ -115,7 +115,7 @@ export default function ProgressPage() {
         </div>
 
         {/* Stats grid */}
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-3 animate-float-up" style={{ animationDelay: '0.1s' }}>
           <StatCard
             label="Economizado"
             value={formatCurrency(stats.moneySaved)}
@@ -142,7 +142,7 @@ export default function ProgressPage() {
 
         {/* Gráfico últimos 14 dias */}
         {last14Days.some(d => d.resisted + d.relapsed > 0) && (
-          <div className="glass-card p-5">
+          <div className="glass-card p-5 animate-float-up" style={{ animationDelay: '0.15s' }}>
             <p className="text-[#A7B4C2] text-xs font-medium uppercase tracking-wide mb-4">Últimos 14 dias</p>
             <div className="flex items-end gap-1 h-20">
               {last14Days.map((d, i) => {
@@ -151,14 +151,14 @@ export default function ProgressPage() {
                 return (
                   <div key={i} className="flex-1 flex flex-col items-center gap-1">
                     <div
-                      className={`w-full rounded-t-sm transition-all ${
+                      className={`w-full rounded-t-sm animate-chart-bar ${
                         d.relapsed > 0
                           ? 'bg-[#FB7185]/60'
                           : total > 0
                           ? 'bg-gradient-to-t from-[#38BDF8] to-[#34D399]'
                           : 'bg-[#162230]'
                       }`}
-                      style={{ height: `${h}px` }}
+                      style={{ height: `${h}px`, animationDelay: `${i * 25}ms` }}
                     />
                   </div>
                 )
@@ -183,13 +183,13 @@ export default function ProgressPage() {
 
         {/* Top gatilhos */}
         {topTriggers.length > 0 && (
-          <div className="glass-card p-5">
+          <div className="glass-card p-5 animate-float-up" style={{ animationDelay: '0.2s' }}>
             <div className="flex items-center gap-2 mb-4">
               <Target size={16} className="text-[#FBBF24]" />
               <p className="text-[#A7B4C2] text-xs font-medium uppercase tracking-wide">Gatilhos mais frequentes</p>
             </div>
             <div className="flex flex-col gap-2.5">
-              {topTriggers.map(t => (
+              {topTriggers.map((t, i) => (
                 <div key={t.id} className="flex items-center gap-3">
                   <span className="text-lg">{t.emoji}</span>
                   <div className="flex-1">
@@ -199,8 +199,8 @@ export default function ProgressPage() {
                     </div>
                     <div className="h-1.5 bg-[#162230] rounded-full overflow-hidden">
                       <div
-                        className="h-full bg-gradient-to-r from-[#38BDF8] to-[#34D399] rounded-full transition-all"
-                        style={{ width: `${(t.count / topTriggers[0].count) * 100}%` }}
+                        className="h-full bg-gradient-to-r from-[#38BDF8] to-[#34D399] rounded-full animate-trigger-fill"
+                        style={{ width: `${(t.count / topTriggers[0].count) * 100}%`, animationDelay: `${i * 70}ms` }}
                       />
                     </div>
                   </div>
@@ -211,7 +211,7 @@ export default function ProgressPage() {
         )}
 
         {/* Saúde — linguagem conservadora, como especificado */}
-        <div className="glass-card p-4 border-[rgba(52,211,153,0.15)]">
+        <div className="glass-card p-4 border-[rgba(52,211,153,0.15)] animate-float-up" style={{ animationDelay: '0.25s' }}>
           <p className="text-[#A7B4C2] text-xs font-medium uppercase tracking-wide mb-2">
             Melhorias comuns após parar de fumar
           </p>

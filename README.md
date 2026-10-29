@@ -18,7 +18,7 @@ O Respira é um aplicativo gratuito, open source e local-first para apoiar quem 
 - Edição de todos os dados do perfil que afetam os cálculos e os gatilhos.
 - Links para apoio profissional gratuito pelo SUS, INCA e Secretaria de Saúde de Minas Gerais.
 - Lembrete diário opcional por notificação do navegador.
-- PWA instalável, com suporte offline conforme os recursos já armazenados pelo navegador.
+- PWA instalável com cache de recursos e tela de contingência offline; o acesso a cada rota depende do cache disponível no navegador.
 
 ## Privacidade
 
@@ -37,7 +37,7 @@ As notificações são opcionais e exigem permissão explícita. O lembrete diá
 Requisitos: Node.js 24 ou versão compatível com Next.js.
 
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
