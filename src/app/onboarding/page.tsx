@@ -2,7 +2,8 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { saveProfile, completeOnboarding } from '@/lib/storage'
+import { getStorageError, loadAppData, saveAppData } from '@/lib/storage'
+import { formatDateTimeLocal, parseDateTimeLocal } from '@/lib/dates'
 import { defaultTriggers, quitReasons } from '@/data/triggers'
 import type { UserProfile } from '@/types'
 import clsx from 'clsx'
@@ -34,6 +35,7 @@ const STEP_ORDER: StepId[] = [
 export default function OnboardingPage() {
   const router = useRouter()
   const [step, setStep] = useState<StepId>('welcome')
+  const [saveError, setSaveError] = useState<string | null>(null)
   const [form, setForm] = useState({
     cigarettesPerDay: '',
     packPrice: '',
@@ -66,18 +68,45 @@ export default function OnboardingPage() {
   }
 
   function finish() {
+    setSaveError(null)
+    const cigarettesPerDay = Number(form.cigarettesPerDay)
+    const packPrice = Number(form.packPrice)
+    const cigarettesPerPack = Number(form.cigarettesPerPack)
+    const lastSmoked = form.lastSmoked || new Date().toISOString()
+
+    if (!Number.isFinite(cigarettesPerDay) || cigarettesPerDay <= 0 || cigarettesPerDay > 200) {
+      setSaveError('Informe uma quantidade válida de cigarros por dia.')
+      return
+    }
+    if (!Number.isFinite(packPrice) || packPrice <= 0 || !Number.isFinite(cigarettesPerPack) || cigarettesPerPack <= 0) {
+      setSaveError('Confira o preço do maço e a quantidade de cigarros.')
+      return
+    }
+    if (!Number.isFinite(Date.parse(lastSmoked)) || Date.parse(lastSmoked) > Date.now()) {
+      setSaveError('Confira a data e o horário do último cigarro.')
+      return
+    }
+
     const profile: UserProfile = {
-      cigarettesPerDay: Number(form.cigarettesPerDay),
-      packPrice: Number(form.packPrice),
-      cigarettesPerPack: Number(form.cigarettesPerPack),
-      lastSmoked: form.lastSmoked || new Date().toISOString(),
+      cigarettesPerDay,
+      packPrice,
+      cigarettesPerPack,
+      lastSmoked,
       quitReason: form.quitReason,
       triggers: form.selectedTriggers,
       mode: 'quit',
       startDate: new Date().toISOString(),
     }
-    saveProfile(profile)
-    completeOnboarding()
+    const current = loadAppData()
+    const saved = saveAppData({
+      ...current,
+      profile,
+      settings: { ...current.settings, hasCompletedOnboarding: true },
+    })
+    if (!saved) {
+      setSaveError(getStorageError() || 'Não foi possível salvar seus dados. Tente novamente.')
+      return
+    }
     router.replace('/home')
   }
 
@@ -100,6 +129,7 @@ export default function OnboardingPage() {
       )}
 
       <div className="flex-1 flex flex-col max-w-md mx-auto w-full px-6 py-8">
+        {saveError && <p role="alert" className="mb-4 rounded-xl border border-[#FB7185]/30 bg-[#FB7185]/10 p-3 text-sm text-[#FDA4AF]">{saveError}</p>}
         {/* Back button */}
         {step !== 'welcome' && step !== 'done' && (
           <button
@@ -300,9 +330,9 @@ export default function OnboardingPage() {
             <div className="flex flex-col gap-4">
               <input
                 type="datetime-local"
-                value={form.lastSmoked ? new Date(form.lastSmoked).toISOString().slice(0, 16) : ''}
-                onChange={e => setForm(f => ({ ...f, lastSmoked: new Date(e.target.value).toISOString() }))}
-                max={new Date().toISOString().slice(0, 16)}
+                value={form.lastSmoked ? formatDateTimeLocal(new Date(form.lastSmoked)) : ''}
+                onChange={e => setForm(f => ({ ...f, lastSmoked: parseDateTimeLocal(e.target.value) || '' }))}
+                max={formatDateTimeLocal(new Date())}
                 className="w-full bg-[#162230] border border-[rgba(56,189,248,0.15)] rounded-xl px-4 py-3.5 text-[#F8FAFC] text-sm focus:outline-none focus:border-[#38BDF8] [color-scheme:dark]"
               />
               <button
