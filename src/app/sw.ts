@@ -1,3 +1,5 @@
+'use strict'
+
 import { defaultCache } from "@serwist/next/worker";
 import type { PrecacheEntry, SerwistGlobalConfig } from "serwist";
 import { Serwist } from "serwist";
@@ -53,4 +55,14 @@ self.addEventListener("notificationclick", (event) => {
       for (const client of clients) {
         if (new URL(client.url).origin !== self.location.origin) continue;
         try {
-          await client.n¶»§q«^
+          await client.navigate(target.href);
+        } catch {
+          // A focused existing client is still better than dropping the action.
+        }
+        return client.focus();
+      }
+
+      return self.clients.openWindow(target.href);
+    })(),
+  );
+});

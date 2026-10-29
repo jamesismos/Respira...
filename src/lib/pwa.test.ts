@@ -30,4 +30,10 @@ describe('recursos PWA', () => {
     const worker = readFileSync(join(process.cwd(), 'src', 'app', 'sw.ts'), 'utf8')
     const config = readFileSync(join(process.cwd(), 'next.config.ts'), 'utf8')
 
-    expect(work¶»§q«^
+    expect(worker).toContain('notificationclick')
+    expect(worker).toContain('"/offline"')
+    expect(worker).toContain('target.origin !== self.location.origin')
+    expect(config).toContain('swSrc: "src/app/sw.ts"')
+    expect(config).toContain('swDest: "public/sw.js"')
+  })
+})
