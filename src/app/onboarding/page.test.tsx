@@ -23,7 +23,14 @@ describe('onboarding', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Agora mesmo' }))
     fireEvent.click(screen.getByRole('button', { name: quitReasons[0] }))
     fireEvent.click(screen.getByRole('button', { name: 'Pular' }))
-    fireEvent.click(screen.getByRole('button', { name: /Abrir o Respira/ }))
+
+    expect(screen.getByRole('heading', { name: 'O que é o Respira?' })).toBeInTheDocument()
+    expect(screen.getByText('R$ 150,00')).toBeInTheDocument()
+    expect(screen.getByText('R$ 1.825,00')).toBeInTheDocument()
+    expect(screen.getByText('3.650 cigarros por ano')).toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: 'Pular' })).not.toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole('button', { name: 'Começar minha jornada' }))
 
     const data = loadAppData()
     expect(data.profile?.cigarettesPerDay).toBe(10)
