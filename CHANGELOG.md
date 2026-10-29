@@ -45,4 +45,6 @@ First public release.
 - Adiciona lembrete diário opcional com permissão explícita, horário configurável e notificação local.
 - Preserva todos os dados no armazenamento do navegador e mantém o backup JSON.
 - Corrige o link para o repositório real.
-- Alinha a instalação do CI ao Node.js 24 e contorna o lockfile dessincronizado com instalação npm.
+- Alinha o CI ao Node.js 24, sincroniza o lockfile e usa `npm ci` para instalação reproduzível.
+- Migra o service worker para Serwist, com fallback offline e tratamento seguro de cliques em notificações.
+- Adiciona auditoria de dependências e verificação do service worker gerado no CI.
