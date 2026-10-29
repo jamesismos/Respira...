@@ -6,18 +6,39 @@ on:
   pull_request:
     branches: ["main"]
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+          persist-credentials: false
 
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "24.x"
           cache: "npm"
+
+      - name: Sync lockfile for this PR (one-time)
+        if: github.event_name == 'pull_request' && github.head_ref == 'chore/lockfile-security-and-pwa'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npm install --ignore-scripts --no-audit --no-fund
+          if ! git diff --quiet -- package-lock.json; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add package-lock.json
+            git commit -m "chore: sync package lock"
+            auth_header="$(printf 'x-access-token:%s' "$GITHUB_TOKEN" | base64 -w0)"
+            git -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $auth_header" push origin "HEAD:${GITHUB_HEAD_REF}"
+          fi
 
       - name: Install dependencies reproducibly
         run: npm ci --no-audit --no-fund
