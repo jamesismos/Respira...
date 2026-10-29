@@ -4,6 +4,8 @@
 
 O Respira é um aplicativo gratuito, open source e local-first para apoiar quem quer parar de fumar. Foi criado por James Oliveira com foco no momento em que a vontade aparece: oferecer uma pausa prática, registrar gatilhos e acompanhar o progresso sem culpa.
 
+**Acesse o app:** [respira-nine.vercel.app](https://respira-nine.vercel.app)
+
 ## Funcionalidades
 
 - Contador de tempo desde o último cigarro.
