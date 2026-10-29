@@ -22,8 +22,10 @@ O Respira é um aplicativo gratuito, open source e local-first para apoiar quem 
 
 ## Privacidade
 
-- Sem conta, backend, analytics ou rastreadores.
-- O app não envia os registros de tabagismo a um servidor.
+- Sem conta, backend de dados do usuário ou sincronização em nuvem.
+- O app não envia perfil, registros de tabagismo, gatilhos, recaídas, humor ou progresso para servidores.
+- O Vercel Web Analytics registra visualizações de páginas e métricas de tráfego, como páginas acessadas e origem do acesso; o painel também pode apresentar informações agregadas sobre navegador, sistema operacional e localização do visitante. Não há eventos personalizados configurados.
+- Como os caminhos das páginas podem revelar que a pessoa usa um app de cessação do tabagismo, o Analytics é uma exceção explícita à política anterior de ausência de rastreamento.
 - Os dados ficam no armazenamento local do navegador, vinculados ao perfil do navegador e à origem do site.
 - Limpar os dados do site ou trocar de domínio/navegador pode fazer os registros deixarem de aparecer. Exporte um backup JSON antes de trocar de endereço e importe-o no novo.
 - O backup é um arquivo local sob controle da usuária. Guarde-o em local privado.
