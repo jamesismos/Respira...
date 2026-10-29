@@ -1,11 +1,12 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
+import type { ReactNode } from 'react'
 import { fireEvent, render, screen } from '@testing-library/react'
 import type { AppData, UserProfile } from '@/types'
 import { loadAppData, saveAppData } from '@/lib/storage'
 import SOSPage from './page'
 
 vi.mock('next/link', () => ({
-  default: (props: { href: string; children: React.ReactNode }) => <a href={props.href}>{props.children}</a>,
+  default: (props: { href: string; children: ReactNode }) => <a href={props.href}>{props.children}</a>,
 }))
 vi.mock('@/components/TimerBreathing', () => ({ default: () => <div data-testid="breathing-timer" /> }))
 vi.mock('@/components/MotivationalPhrase', () => ({ default: () => <p>Frase de apoio</p> }))
