@@ -123,7 +123,8 @@ body {
 /* Respiração SOS: ciclo contínuo de 4s inspirando, 4s segurando, 6s expirando e 2s de pausa. */
 @keyframes respira-breathing-cycle {
   0% { transform: scale(1); animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
-  25%, 50% { transform: scale(1.18); }
+  25% { transform: scale(1.18); animation-timing-function: linear; }
+  50% { transform: scale(1.18); animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
   87.5%, 100% { transform: scale(1); }
 }
 
