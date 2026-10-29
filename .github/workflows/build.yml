@@ -25,17 +25,18 @@ jobs:
           node-version: "24.x"
           cache: "npm"
 
-      - name: Sync lockfile for this PR (one-time)
+      - name: Sync lockfile and apply compatible security fixes (one-time)
         if: github.event_name == 'pull_request' && github.head_ref == 'chore/lockfile-security-and-pwa'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           npm install --ignore-scripts --no-audit --no-fund
+          npm audit fix --ignore-scripts --no-fund
           if ! git diff --quiet -- package-lock.json; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git add package-lock.json
-            git commit -m "chore: sync package lock"
+            git commit -m "chore: sync package lock and security fixes"
             auth_header="$(printf 'x-access-token:%s' "$GITHUB_TOKEN" | base64 -w0)"
             git -c "http.https://github.com/.extraheader=AUTHORIZATION: basic $auth_header" push origin "HEAD:${GITHUB_HEAD_REF}"
           fi
