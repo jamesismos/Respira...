@@ -35,3 +35,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 First public release.
 
 > "Uma vontade de cada vez."
+
+
+## [1.0.1] — 2026-10-29
+
+### Restaurado
+- Reativa a página inicial e redireciona para o onboarding ou para a Home conforme os dados locais.
+- Restaura os metadados da PWA e o vínculo com o manifest.
+- Adiciona lembrete diário opcional com permissão explícita, horário configurável e notificação local.
+- Preserva todos os dados no armazenamento do navegador e mantém o backup JSON.
+- Corrige o link para o repositório real.
+- Alinha a instalação do CI ao Node.js 24 e contorna o lockfile dessincronizado com instalação npm.

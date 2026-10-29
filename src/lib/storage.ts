@@ -13,6 +13,8 @@ const APP_VERSION = '1.0.0'
 const defaultSettings: AppSettings = {
   theme: 'dark',
   hasCompletedOnboarding: false,
+  notificationsEnabled: false,
+  reminderTime: '20:00',
 }
 
 const defaultData: AppData = {
@@ -30,7 +32,15 @@ export function loadAppData(): AppData {
   if (typeof window === 'undefined') return defaultData
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
-    if (!raw) return { ...defaultData }
+    if (!raw) {
+      return {
+        ...defaultData,
+        settings: { ...defaultSettings },
+        cravingLogs: [],
+        relapseLogs: [],
+        dailyLogs: [],
+      }
+    }
     const parsed = (JSON.parse(raw) || {}) as Partial<AppData>
     return {
       profile: parsed.profile || null,
@@ -41,7 +51,13 @@ export function loadAppData(): AppData {
       version: parsed.version || APP_VERSION,
     }
   } catch {
-    return { ...defaultData }
+    return {
+      ...defaultData,
+      settings: { ...defaultSettings },
+      cravingLogs: [],
+      relapseLogs: [],
+      dailyLogs: [],
+    }
   }
 }
 
@@ -72,9 +88,9 @@ export function loadProfile(): UserProfile | null {
 
 // ─── Settings ────────────────────────────────────────────────
 
-export function saveSettings(settings: AppSettings): void {
+export function saveSettings(settings: Partial<AppSettings>): void {
   const data = loadAppData()
-  saveAppData({ ...data, settings })
+  saveAppData({ ...data, settings: { ...data.settings, ...settings } })
 }
 
 export function loadSettings(): AppSettings {

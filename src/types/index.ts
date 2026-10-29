@@ -49,6 +49,8 @@ export interface AppSettings {
   theme: 'dark' | 'light'
   motivationalName?: string
   notificationsEnabled?: boolean
+  reminderTime?: string
+  lastReminderDate?: string
   hasCompletedOnboarding: boolean
   lastNotifiedMilestone?: number
 }

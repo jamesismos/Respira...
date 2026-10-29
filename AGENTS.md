@@ -7,7 +7,7 @@
 
 ## Sobre o projeto
 
-Respira é uma PWA Next.js 15 + TypeScript + TailwindCSS.
+Respira é uma PWA Next.js 16 + TypeScript + TailwindCSS.
 App local para parar de fumar. Sem backend. Sem login. Sem analytics.
 
 ---
@@ -63,6 +63,7 @@ public/
 8. **A tela SOS é prioridade de qualidade máxima.**
 9. **Recaída preserva histórico.** Nunca deletar dados anteriores.
 10. **MVP 1.0 = modo "parar de vez" apenas.** Modo "reduzir" é v1.1.
+11. **Notificações são opt-in e locais.** Não prometer entrega quando o app estiver totalmente fechado sem push/backend.
 
 ---
 
@@ -89,11 +90,11 @@ style: ajusta espaçamento da home no mobile
 
 | O que | Como |
 |---|---|
-| Framework | Next.js 15 App Router |
+| Framework | Next.js 16 App Router |
 | Linguagem | TypeScript strict |
 | Estilo | TailwindCSS |
 | Dados | localStorage → `src/lib/storage.ts` |
-| PWA | manifest.json + service worker |
+| PWA | manifest.json + next-pwa + service worker customizado |
 | Ícones | lucide-react |
 | QR Code | qrcode.react |
 | Backend | ❌ nenhum |

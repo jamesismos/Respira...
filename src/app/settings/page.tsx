@@ -8,6 +8,7 @@ import type { UserProfile } from '@/types'
 import { quitReasons } from '@/data/triggers'
 import BottomNav from '@/components/BottomNav'
 import BackupControls from '@/components/BackupControls'
+import NotificationSettings from '@/components/NotificationSettings'
 import { Settings, Heart, AlertTriangle, ChevronRight, User } from 'lucide-react'
 
 export default function SettingsPage() {
@@ -148,6 +149,9 @@ export default function SettingsPage() {
           <BackupControls />
         </div>
 
+        {/* ── LEMBRETES OPCIONAIS ── */}
+        <NotificationSettings />
+
         {/* ── SOBRE O RESPIRA E DOAÇÃO ── */}
         <div className="flex flex-col gap-3 mt-4">
           <Link
@@ -162,12 +166,12 @@ export default function SettingsPage() {
           </Link>
           
           <a
-            href="https://github.com/jamesismos/Respira"
+            href="https://github.com/jamesismos/Respira..."
             target="_blank"
             rel="noopener noreferrer"
             className="text-center text-[#64748B] text-xs underline underline-offset-4 pt-2 pb-4"
           >
-            Código aberto no GitHub (v1.0.0)
+            Código-fonte no GitHub (v1.0.1)
           </a>
         </div>
 

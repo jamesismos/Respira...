@@ -160,3 +160,14 @@ src/data/            ← dados estáticos: frases, gatilhos, doação
 8. Qualquer acesso a dados passa por `src/lib/storage.ts`.
 9. Commits devem ser pequenos, naturais e incrementais.
 10. Ler este arquivo antes de qualquer implementação nova.
+
+
+---
+
+## Reativação e notificações locais — 2026-10-29
+
+- O projeto está ativo novamente; a página raiz deve encaminhar para onboarding ou Home conforme os dados locais.
+- Notificações são opcionais, pedem permissão por ação explícita e permitem escolher um horário diário.
+- Não usar push remoto, backend, analytics ou rastreamento.
+- Sem backend/push, o navegador não garante notificações agendadas quando o app está totalmente fechado. A interface deve comunicar essa limitação.
+- Alterar o domínio cria uma origem diferente e, portanto, outro armazenamento local. Orientar exportação/importação de backup antes da troca.
