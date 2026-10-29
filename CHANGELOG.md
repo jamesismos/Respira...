@@ -48,3 +48,4 @@ First public release.
 - Alinha o CI ao Node.js 24, sincroniza o lockfile e usa `npm ci` para instalação reproduzível.
 - Migra o service worker para Serwist, com fallback offline e tratamento seguro de cliques em notificações.
 - Adiciona auditoria de dependências e verificação do service worker gerado no CI.
+- Atualiza as actions do GitHub para execução nativa no Node.js 24 e desativa telemetria do Next.js durante o build do CI.
