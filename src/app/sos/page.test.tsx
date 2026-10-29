@@ -5,11 +5,9 @@ import { loadAppData, saveAppData } from '@/lib/storage'
 import SOSPage from './page'
 
 vi.mock('next/link', () => ({
-  default: (props: any) => <a href={props.href} {...props}>{props.children}</a>,
+  default: (props: { href: string; children: React.ReactNode }) => <a href={props.href}>{props.children}</a>,
 }))
-vi.mock('@/components/TimerBreathing', () => ({
-  default: (props: { onComplete: () => void }) => <button type="button" onClick={props.onComplete}>Avançar sem timer</button>,
-}))
+vi.mock('@/components/TimerBreathing', () => ({ default: () => <div data-testid="breathing-timer" /> }))
 vi.mock('@/components/MotivationalPhrase', () => ({ default: () => <p>Frase de apoio</p> }))
 vi.mock('@/components/BottomNav', () => ({ default: () => null }))
 
