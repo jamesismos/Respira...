@@ -7,7 +7,8 @@ import { formatDateTimeLocal, parseDateTimeLocal } from '@/lib/dates'
 import { defaultTriggers, quitReasons } from '@/data/triggers'
 import type { UserProfile } from '@/types'
 import clsx from 'clsx'
-import { ChevronRight, ChevronLeft, Leaf } from 'lucide-react'
+import { ChevronRight, ChevronLeft, Leaf, Wallet, HeartPulse, Cigarette } from 'lucide-react'
+import { formatCurrency } from '@/lib/stats'
 
 // ─── Steps ───────────────────────────────────────────────────
 
@@ -47,6 +48,15 @@ export default function OnboardingPage() {
 
   const stepIndex = STEP_ORDER.indexOf(step)
   const totalSteps = STEP_ORDER.length - 2 // exclude welcome and done
+  const cigarettesPerDay = Number(form.cigarettesPerDay)
+  const packPrice = Number(form.packPrice)
+  const cigarettesPerPack = Number(form.cigarettesPerPack)
+  const dailySmokingCost = cigarettesPerPack > 0
+    ? (cigarettesPerDay / cigarettesPerPack) * packPrice
+    : 0
+  const monthlySmokingCost = dailySmokingCost * 30
+  const annualSmokingCost = dailySmokingCost * 365
+  const annualCigarettes = Math.round(cigarettesPerDay * 365)
 
   function next() {
     const nextIndex = stepIndex + 1
@@ -423,26 +433,94 @@ export default function OnboardingPage() {
           </div>
         )}
 
-        {/* ── DONE ── */}
+        {/* ── APRESENTAÇÃO DO RESPIRA ── */}
         {step === 'done' && (
-          <div className="flex-1 flex flex-col items-center justify-center gap-8 animate-float-up text-center">
-            <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#38BDF8] to-[#34D399] flex items-center justify-center shadow-xl shadow-[#38BDF8]/30">
-              <Leaf size={36} className="text-white" />
-            </div>
-            <div>
-              <h2 className="text-3xl font-bold text-[#F8FAFC]">Pronto.</h2>
-              <p className="text-[#A7B4C2] mt-2 leading-relaxed">
-                O contador começa agora.
-                <br />
-                Uma vontade de cada vez.
+          <div className="flex-1 flex flex-col gap-5 animate-float-up pb-8">
+            <div className="flex flex-col items-center text-center gap-3 pt-2">
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#38BDF8] to-[#34D399] flex items-center justify-center shadow-xl shadow-[#38BDF8]/20">
+                <Leaf size={32} className="text-white" />
+              </div>
+              <p className="text-[#34D399] text-xs font-semibold uppercase tracking-[0.18em]">Antes de começar</p>
+              <h2 className="text-3xl font-bold text-[#F8FAFC]">O que é o Respira?</h2>
+              <p className="text-[#A7B4C2] text-sm leading-relaxed">
+                O Respira é um app gratuito para apoiar você a parar de fumar, uma vontade de cada vez.
+                A ideia é ajudar a interromper o ciclo da dependência da nicotina e reduzir a exposição
+                contínua à fumaça do tabaco — sem culpa e sem pressão.
               </p>
             </div>
+
+            <div className="glass-card p-5">
+              <div className="flex items-center gap-2 mb-4">
+                <Wallet size={18} className="text-[#38BDF8]" />
+                <h3 className="text-[#F8FAFC] font-semibold">Quanto esse hábito representa no bolso</h3>
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <div className="rounded-xl bg-[#07111A]/70 p-3">
+                  <p className="text-[#A7B4C2] text-xs">Em 30 dias</p>
+                  <p className="text-2xl font-bold text-[#F8FAFC] mt-1">{formatCurrency(monthlySmokingCost)}</p>
+                </div>
+                <div className="rounded-xl bg-[#07111A]/70 p-3">
+                  <p className="text-[#A7B4C2] text-xs">Em um ano</p>
+                  <p className="text-2xl font-bold text-[#F8FAFC] mt-1">{formatCurrency(annualSmokingCost)}</p>
+                </div>
+              </div>
+              <p className="text-[#64748B] text-xs mt-3">
+                Estimativa com base no consumo e no preço informados, mantendo o mesmo padrão por 30 ou 365 dias.
+              </p>
+            </div>
+
+            <div className="glass-card p-5">
+              <div className="flex items-center gap-2 mb-3">
+                <HeartPulse size={18} className="text-[#FB7185]" />
+                <h3 className="text-[#F8FAFC] font-semibold">O impacto vai além do dinheiro</h3>
+              </div>
+              <p className="text-[#A7B4C2] text-sm leading-relaxed">
+                O tabagismo aumenta o risco de doenças cardiovasculares, doenças respiratórias crônicas
+                e diversos tipos de câncer. Isso não é uma previsão sobre o que vai acontecer com você:
+                é um alerta sobre riscos associados ao consumo de tabaco.
+              </p>
+              <div className="mt-4 rounded-xl bg-[#07111A]/70 p-3 flex items-center gap-3">
+                <Cigarette size={20} className="text-[#FBBF24] shrink-0" />
+                <p className="text-sm text-[#F8FAFC]">
+                  No padrão informado, seriam cerca de{' '}
+                  <strong>{new Intl.NumberFormat('pt-BR').format(annualCigarettes)} cigarros por ano</strong>.
+                </p>
+              </div>
+              <a
+                href="https://www.gov.br/inca/pt-br/assuntos/causas-e-prevencao-do-cancer/tabagismo"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block text-xs text-[#38BDF8] underline underline-offset-2 mt-3"
+              >
+                Fonte: Instituto Nacional de Câncer (INCA)
+              </a>
+            </div>
+
+            <div className="rounded-xl border border-[rgba(52,211,153,0.2)] bg-[rgba(52,211,153,0.06)] p-4">
+              <p className="text-[#F8FAFC] text-sm font-semibold">Como o Respira vai ajudar</p>
+              <p className="text-[#A7B4C2] text-sm leading-relaxed mt-1">
+                Você poderá acompanhar o tempo sem fumar, o dinheiro economizado e os cigarros evitados.
+                Quando a vontade aparecer, terá o SOS para atravessar aquele momento. Seus registros
+                pessoais continuam salvos no seu dispositivo.
+              </p>
+              {form.quitReason && (
+                <p className="text-[#34D399] text-xs mt-3">
+                  Seu motivo para começar: {form.quitReason}.
+                </p>
+              )}
+            </div>
+
+            <p className="text-[#64748B] text-xs text-center leading-relaxed">
+              O Respira é uma ferramenta de apoio, não um tratamento médico e não substitui acompanhamento
+              profissional. O SUS oferece tratamento para quem deseja parar de fumar.
+            </p>
+
             <button
               id="btn-onboarding-done"
               onClick={finish}
               className="w-full py-4 rounded-2xl bg-gradient-to-r from-[#38BDF8] to-[#34D399] text-white font-bold text-lg shadow-lg shadow-[#38BDF8]/25"
             >
-              Abrir o Respira 💚
+              Começar minha jornada
             </button>
           </div>
         )}
