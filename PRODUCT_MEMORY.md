@@ -32,7 +32,7 @@ Qualquer feature, copia ou decisão de produto deve ser avaliada contra esses qu
 - Nunca tela vermelha, nunca "você perdeu", nunca contador zerado com drama.
 - Nunca prometer cura nem resultado médico individual.
 - Nunca exibir doação em momentos vulneráveis (SOS, recaída, fissura).
-- Nunca enviar dados para fora do dispositivo sem consentimento explícito.
+- Transparência: informar que visualizações de página e métricas de tráfego são enviadas ao Vercel Analytics; nomes de rotas podem revelar o uso de um app de cessação do tabagismo.
 
 ### Autonomia — *Respeitar as decisões da pessoa*
 > A usuária tem controle total sobre si e sobre seus dados.
@@ -55,11 +55,11 @@ Qualquer feature, copia ou decisão de produto deve ser avaliada contra esses qu
 ## Decisões de produto
 
 ### Privacidade e dados
-- **O Respira é local-first.** Nenhum dado sai do dispositivo.
-- **Sem backend.** Sem servidor, sem API, sem nuvem.
+- **O Respira é local-first.** Os registros do usuário ficam no dispositivo; métricas de navegação são uma exceção explícita e limitada ao Vercel Web Analytics.
+- **Sem backend de dados do usuário.** Sem conta, API de produto ou sincronização em nuvem; o script do Vercel Analytics é a única integração externa de métricas.
 - **Sem login.** Sem conta, sem e-mail, sem senha.
-- **Sem analytics.** Sem Google Analytics, sem Amplitude, sem Mixpanel.
-- **Sem coleta de dados sensíveis.** Tabagismo é dado sensível. Fica no dispositivo.
+- **Analytics limitado.** Usar somente Vercel Web Analytics (`@vercel/analytics`) para visualizações de página e métricas de tráfego; não configurar eventos personalizados nem outros trackers.
+- **Dados sensíveis não saem do dispositivo.** Perfil, consumo, gatilhos, recaídas, humor e progresso permanecem no armazenamento local e não podem ser enviados ao Analytics ou a qualquer servidor.
 - `localStorage` no MVP. `IndexedDB` depois, sem refatorar o app (camada de storage abstrata).
 - Todo acesso ao `localStorage` passa por `src/lib/storage.ts`. Nenhum componente acessa diretamente.
 
@@ -150,8 +150,8 @@ src/data/            ← dados estáticos: frases, gatilhos, doação
 
 ## Regras para agentes de IA
 
-1. Não criar nenhuma chamada de API externa.
-2. Não instalar bibliotecas de analytics ou tracking.
+1. Não criar integrações externas além do Vercel Web Analytics aprovado; nunca enviar dados pessoais ou sensíveis do app.
+2. Não instalar outras bibliotecas de analytics/tracking nem eventos personalizados; manter somente `@vercel/analytics` para visualizações de página.
 3. Não adicionar Firebase, Supabase, Auth.js ou qualquer serviço externo.
 4. Não mostrar doação fora das Configurações.
 5. Não usar linguagem de culpa em nenhuma tela.
@@ -168,6 +168,6 @@ src/data/            ← dados estáticos: frases, gatilhos, doação
 
 - O projeto está ativo novamente; a página raiz deve encaminhar para onboarding ou Home conforme os dados locais.
 - Notificações são opcionais, pedem permissão por ação explícita e permitem escolher um horário diário.
-- Não usar push remoto, backend, analytics ou rastreamento.
+- Não usar push remoto nem analytics além do Vercel Web Analytics de visualizações de página; sem eventos personalizados.
 - Sem backend/push, o navegador não garante notificações agendadas quando o app está totalmente fechado. A interface deve comunicar essa limitação.
 - Alterar o domínio cria uma origem diferente e, portanto, outro armazenamento local. Orientar exportação/importação de backup antes da troca.
