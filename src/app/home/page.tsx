@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
-import { loadAppData, addRelapseLog, addCravingLog } from '@/lib/storage'
+import { loadAppData, getStorageError, recordRelapse } from '@/lib/storage'
 import {
   calculateSmokeFreeSeconds,
   formatSmokeFreeTime,
@@ -27,6 +27,7 @@ export default function HomePage() {
   const [cigarettesAvoided, setCigarettesAvoided] = useState(0)
   const [bestStreak, setBestStreak] = useState(0)
   const [showRelapseModal, setShowRelapseModal] = useState(false)
+  const [saveError, setSaveError] = useState<string | null>(null)
   const [greeting, setGreeting] = useState('')
 
   const refreshStats = useCallback(() => {
@@ -67,43 +68,46 @@ export default function HomePage() {
     where: string
     wasAutomatic: boolean
     whatCouldHelp: string
-  }) {
-    if (!profile) return
+  }): boolean {
+    if (!profile) return false
+    setSaveError(null)
     const nowIso = new Date().toISOString()
     const currentSecs = calculateSmokeFreeSeconds(profile.lastSmoked)
     const currentDays = Math.floor(currentSecs / 86400)
     const currentHours = Math.floor((currentSecs % 86400) / 3600)
 
     const log: RelapseLog = {
-      id: `relapse-${Date.now()}`,
+      id: 'relapse-' + Date.now(),
       timestamp: nowIso,
       previousStreakDays: currentDays,
       previousStreakHours: currentHours,
       ...formData,
     }
-    addRelapseLog(log, nowIso)
 
-    // Mapeia o local (where) para o gatilho (trigger) mais próximo no Diário
     let mappedTrigger = 'outro'
     if (formData.where === 'trabalho') mappedTrigger = 'trabalho'
     else if (formData.where === 'social') mappedTrigger = 'social'
     else if (formData.where === 'bar') mappedTrigger = 'alcool'
     else if (formData.where === 'carro') mappedTrigger = 'dirigindo'
 
-    // Salva a recaída também como um registro no Diário de Gatilhos
     const diaryEntry: CravingLog = {
-      id: `craving-relapse-${Date.now()}`,
+      id: 'craving-relapse-' + Date.now(),
       timestamp: nowIso,
       trigger: mappedTrigger,
       intensity: 5,
       resisted: false,
       mood: formData.mood,
-      notes: `${formData.whatHappened}${formData.whatCouldHelp ? `\n\nO que pode ajudar na próxima vez: ${formData.whatCouldHelp}` : ''}`,
+      notes: formData.whatHappened + (formData.whatCouldHelp ? '\n\nO que pode ajudar na próxima vez: ' + formData.whatCouldHelp : ''),
     }
-    addCravingLog(diaryEntry)
+
+    if (!recordRelapse(log, diaryEntry)) {
+      setSaveError(getStorageError() || 'Não foi possível salvar a recaída. Seus dados não foram confirmados como salvos.')
+      return false
+    }
 
     setShowRelapseModal(false)
     refreshStats()
+    return true
   }
 
   if (!profile) return null
@@ -216,7 +220,7 @@ export default function HomePage() {
             </button>
             <button
               id="btn-report-relapse"
-              onClick={() => setShowRelapseModal(true)}
+              onClick={() => { setSaveError(null); setShowRelapseModal(true) }}
               className="py-3.5 px-4 rounded-xl bg-[#0F1B24] border border-[rgba(251,113,133,0.15)] text-[#FB7185] text-sm font-medium text-left flex items-center gap-2 active:bg-[#1a1520] transition-colors"
             >
               🌿 Fumei agora
@@ -248,6 +252,7 @@ export default function HomePage() {
       {showRelapseModal && profile && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
           <div className="bg-[#0F1B24] rounded-3xl w-full max-w-md p-6 border border-[rgba(56,189,248,0.15)] max-h-[85vh] overflow-y-auto">
+            {saveError && <p role="alert" className="mb-4 rounded-xl border border-[#FB7185]/30 bg-[#FB7185]/10 p-3 text-sm text-[#FDA4AF]">{saveError}</p>}
             <RelapseModal
               currentStreakDays={smokeFreeTime.days}
               currentStreakHours={smokeFreeTime.hours}
