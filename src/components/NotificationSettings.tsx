@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { AlertCircle, Bell, CheckCircle2, Clock, ShieldCheck } from 'lucide-react'
-import { loadAppData, saveSettings } from '@/lib/storage'
+import { getStorageError, loadAppData, saveSettings } from '@/lib/storage'
 import { showLocalNotification } from '@/lib/notifications'
 
 type PermissionState = NotificationPermission | 'unsupported'
@@ -14,6 +14,7 @@ export default function NotificationSettings() {
   const [enabled, setEnabled] = useState(false)
   const [reminderTime, setReminderTime] = useState('20:00')
   const [message, setMessage] = useState('')
+  const [messageIsError, setMessageIsError] = useState(false)
 
   useEffect(() => {
     const apiAvailable = window.isSecureContext && 'Notification' in window
@@ -28,9 +29,14 @@ export default function NotificationSettings() {
 
   async function toggleReminders() {
     setMessage('')
+    setMessageIsError(false)
 
     if (enabled) {
-      saveSettings({ notificationsEnabled: false })
+      if (!saveSettings({ notificationsEnabled: false })) {
+        setMessage(getStorageError() || 'Não foi possível salvar essa preferência.')
+        setMessageIsError(true)
+        return
+      }
       setEnabled(false)
       setMessage('Lembretes pausados. Você pode reativá-los quando quiser.')
       return
@@ -38,12 +44,14 @@ export default function NotificationSettings() {
 
     if (!supported) {
       setMessage('Este navegador precisa oferecer notificações em uma conexão segura (HTTPS ou localhost).')
+      setMessageIsError(true)
       return
     }
 
     if (Notification.permission === 'denied') {
       setPermission('denied')
       setMessage('As notificações estão bloqueadas pelo navegador. Altere a permissão deste site nas configurações do navegador.')
+      setMessageIsError(true)
       return
     }
 
@@ -55,22 +63,36 @@ export default function NotificationSettings() {
     setPermission(nextPermission)
     if (nextPermission !== 'granted') {
       setMessage('Nenhuma notificação será enviada sem sua permissão.')
+      setMessageIsError(true)
       return
     }
 
-    saveSettings({ notificationsEnabled: true, reminderTime })
+    if (!saveSettings({ notificationsEnabled: true, reminderTime })) {
+      setMessage(getStorageError() || 'A permissão foi concedida, mas a preferência não pôde ser salva.')
+      setMessageIsError(true)
+      return
+    }
     setEnabled(true)
     setMessage('Lembrete diário ativado neste navegador.')
+    setMessageIsError(false)
   }
 
   function changeReminderTime(value: string) {
+    const previous = reminderTime
     setReminderTime(value)
-    saveSettings({ reminderTime: value })
+    if (!saveSettings({ reminderTime: value })) {
+      setReminderTime(previous)
+      setMessage(getStorageError() || 'Não foi possível salvar o horário do lembrete.')
+      setMessageIsError(true)
+      return
+    }
     setMessage('Horário salvo neste navegador.')
+    setMessageIsError(false)
   }
 
   async function testNotification() {
     setMessage('')
+    setMessageIsError(false)
     const shown = await showLocalNotification(
       'Respira — teste de notificação',
       'Está tudo funcionando. Uma vontade de cada vez.',
@@ -81,6 +103,7 @@ export default function NotificationSettings() {
         ? 'Notificação de teste enviada.'
         : 'Não foi possível exibir a notificação. Confira a permissão do navegador.',
     )
+    setMessageIsError(!shown)
   }
 
   return (
@@ -157,8 +180,8 @@ export default function NotificationSettings() {
       </div>
 
       {message && (
-        <p role="status" aria-live="polite" className="flex items-center gap-2 text-sm text-[#34D399]">
-          <CheckCircle2 size={16} aria-hidden="true" />
+        <p role={messageIsError ? 'alert' : 'status'} aria-live="polite" className={'flex items-center gap-2 text-sm ' + (messageIsError ? 'text-[#FDA4AF]' : 'text-[#34D399]')}>
+          {messageIsError ? <AlertCircle size={16} aria-hidden="true" /> : <CheckCircle2 size={16} aria-hidden="true" />}
           {message}
         </p>
       )}
