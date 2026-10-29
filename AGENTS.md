@@ -15,17 +15,18 @@ App local para parar de fumar. Sem backend. Sem login. Sem analytics.
 ## Comandos essenciais
 
 ```bash
+# Instalação reproduzível
+npm ci
+
 # Desenvolvimento
 npm run dev
 
-# Build
-npm run build
-
-# Lint
+# Qualidade e build
 npm run lint
-
-# Tipos
 npx tsc --noEmit
+npm test
+npm audit --audit-level=high
+npm run build
 ```
 
 ---
@@ -78,7 +79,7 @@ fix: contador de tempo não atualizava no background
 feat: exportar backup em JSON
 📝 docs: adiciona README e PRODUCT_MEMORY
 refactor: separa lógica de storage em lib/storage.ts
-chore: configura next-pwa e manifest
+chore: configura Serwist, manifest e service worker
 🔥 SOS flow completo com timer e respiração guiada
 feat(relapse): preserva histórico ao reiniciar contador
 style: ajusta espaçamento da home no mobile
@@ -94,7 +95,7 @@ style: ajusta espaçamento da home no mobile
 | Linguagem | TypeScript strict |
 | Estilo | TailwindCSS |
 | Dados | localStorage → `src/lib/storage.ts` |
-| PWA | manifest.json + next-pwa + service worker customizado |
+| PWA | manifest.json + @serwist/next + Serwist worker em src/app/sw.ts |
 | Ícones | lucide-react |
 | QR Code | qrcode.react |
 | Backend | ❌ nenhum |
@@ -119,10 +120,9 @@ AppData         ← estrutura completa para backup
 |---|---|
 | `/` | Redirect → onboarding ou home |
 | `/onboarding` | Configuração inicial |
-| `/home` | Home principal |
+| `/home` | Home principal e registro de recaída (modal) |
 | `/sos` | SOS Vontade (core feature) |
 | `/triggers` | Diário de gatilhos |
 | `/progress` | Progresso |
-| `/relapse` | Recaída sem culpa |
 | `/settings` | Configurações |
 | `/settings/donate` | Apoiar o projeto (discreto) |
