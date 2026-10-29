@@ -2,6 +2,7 @@ import { loadAppData, saveSettings } from '@/lib/storage'
 
 const DEFAULT_REMINDER_TIME = '20:00'
 let reminderInFlight = false
+let lastReminderShownDate: string | null = null
 
 function localDateKey(date: Date): string {
   const year = date.getFullYear()
@@ -72,7 +73,7 @@ export async function checkDailyReminder(): Promise<void> {
   if (minutesAfterReminder < 0 || minutesAfterReminder >= 10) return
 
   const today = localDateKey(now)
-  if (settings.lastReminderDate === today) return
+  if (settings.lastReminderDate === today || lastReminderShownDate === today) return
 
   reminderInFlight = true
   try {
@@ -81,7 +82,10 @@ export async function checkDailyReminder(): Promise<void> {
       'Uma pausa para você: como está sua vontade agora? Uma vontade de cada vez.',
       '/home',
     )
-    if (shown) saveSettings({ lastReminderDate: today })
+    if (shown) {
+      lastReminderShownDate = today
+      saveSettings({ lastReminderDate: today })
+    }
   } finally {
     reminderInFlight = false
   }
