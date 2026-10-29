@@ -8,5 +8,6 @@ describe('PWA manifest', () => {
     expect(manifest.start_url).toBe('/')
     expect(manifest.icons.some(icon => icon.sizes === '192x192')).toBe(true)
     expect(manifest.icons.some(icon => icon.sizes === '512x512')).toBe(true)
+    expect('screenshots' in manifest).toBe(false)
   })
 })
