@@ -152,7 +152,7 @@ src/data/            ← dados estáticos: frases, gatilhos, doação
 
 1. Não criar integrações externas além do Vercel Web Analytics aprovado; nunca enviar dados pessoais ou sensíveis do app.
 2. Não instalar outras bibliotecas de analytics/tracking nem eventos personalizados; manter somente `@vercel/analytics` para visualizações de página.
-3. Não adicionar Firebase, Supabase, Auth.js ou qualquer serviço externo.
+3. Não adicionar Firebase, Supabase, Auth.js ou serviços externos de backend/sincronização.
 4. Não mostrar doação fora das Configurações.
 5. Não usar linguagem de culpa em nenhuma tela.
 6. Não prometer resultado médico.
