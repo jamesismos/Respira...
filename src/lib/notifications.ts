@@ -23,7 +23,6 @@ export async function showLocalNotification(
     icon: '/icons/respira_app_icon.png',
     badge: '/icons/respira_app_icon.png',
     tag: 'respira-reminder',
-    renotify: false,
     data: { url },
   }
 
