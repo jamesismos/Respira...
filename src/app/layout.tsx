@@ -11,6 +11,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://respira-nine.vercel.app'),
   applicationName: 'Respira',
   title: {
     default: 'Respira — Uma vontade de cada vez',
@@ -20,6 +21,7 @@ export const metadata: Metadata = {
     'Um app gratuito, local e privado para apoiar quem quer parar de fumar, registrar gatilhos e acompanhar o progresso sem culpa.',
   openGraph: {
     type: 'website',
+    url: 'https://respira-nine.vercel.app',
     locale: 'pt_BR',
     siteName: 'Respira',
     title: 'Respira — Uma vontade de cada vez',
