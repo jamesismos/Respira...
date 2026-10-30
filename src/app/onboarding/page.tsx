@@ -183,7 +183,7 @@ export default function OnboardingPage() {
                 Começar
               </button>
               <p className="text-center text-[#64748B] text-xs">
-                Sem conta. Sem dados enviados. Tudo fica aqui.
+                Sem conta. Seus registros pessoais ficam no dispositivo. O app registra visualizações de páginas via Vercel Analytics.
               </p>
             </div>
           </div>
@@ -501,7 +501,7 @@ export default function OnboardingPage() {
               <p className="text-[#A7B4C2] text-sm leading-relaxed mt-1">
                 Você poderá acompanhar o tempo sem fumar, o dinheiro economizado e os cigarros evitados.
                 Quando a vontade aparecer, terá o SOS para atravessar aquele momento. Seus registros
-                pessoais continuam salvos no seu dispositivo.
+                pessoais continuam salvos no seu dispositivo. Para entender o uso do app, o Vercel Analytics registra visualizações de páginas; seus dados de tabagismo não são enviados.
               </p>
               {form.quitReason && (
                 <p className="text-[#34D399] text-xs mt-3">
