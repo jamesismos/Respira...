@@ -24,11 +24,11 @@ describe('onboarding', () => {
     fireEvent.click(screen.getByRole('button', { name: quitReasons[0] }))
     fireEvent.click(screen.getByRole('button', { name: 'Pular' }))
 
-    expect(screen.getByRole('heading', { name: 'O que é o Respira?' })).toBeInTheDocument()
-    expect(screen.getByText('R$ 150,00')).toBeInTheDocument()
-    expect(screen.getByText('R$ 1.825,00')).toBeInTheDocument()
-    expect(screen.getByText('3.650 cigarros por ano')).toBeInTheDocument()
-    expect(screen.queryByRole('button', { name: 'Pular' })).not.toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'O que é o Respira?' })).toBeDefined()
+    expect(screen.getByText('R$ 150,00')).toBeDefined()
+    expect(screen.getByText('R$ 1.825,00')).toBeDefined()
+    expect(screen.getByText('3.650 cigarros por ano')).toBeDefined()
+    expect(screen.queryByRole('button', { name: 'Pular' })).toBeNull()
 
     fireEvent.click(screen.getByRole('button', { name: 'Começar minha jornada' }))
 
