@@ -63,6 +63,14 @@ Qualquer feature, copia ou decisão de produto deve ser avaliada contra esses qu
 - `localStorage` no MVP. `IndexedDB` depois, sem refatorar o app (camada de storage abstrata).
 - Todo acesso ao `localStorage` passa por `src/lib/storage.ts`. Nenhum componente acessa diretamente.
 
+### Onboarding
+- Primeira entrada: apresentação inicial → seis perguntas, uma por vez → explicação do Respira → Home.
+- Depois da pergunta 6, apresentar o que é o Respira, sua proposta de apoio à cessação do tabagismo, estimativas de gasto em 30 e 365 dias e informação geral sobre riscos à saúde.
+- Calcular gastos e quantidade anual de cigarros apenas com os valores informados pela pessoa; deixar claro que são estimativas, não previsões individuais.
+- Não usar linguagem de medo ou culpa. Explicar riscos de forma objetiva, com fonte oficial do INCA.
+- A etapa de apresentação não deve ter botão para pular; a pessoa segue para a Home pelo CTA principal.
+- A seleção de gatilhos continua opcional; a pessoa pode avançar sem selecionar nenhum.
+
 ### Linguagem e tom
 - **O app nunca usa culpa como mecanismo.**
 - **O app nunca promete cura.**
