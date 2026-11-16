@@ -98,6 +98,7 @@ export default function HomePage() {
       intensity: 5,
       resisted: false,
       mood: formData.mood,
+      where: formData.where,
       notes: formData.whatHappened + (formData.whatCouldHelp ? '\n\nO que pode ajudar na próxima vez: ' + formData.whatCouldHelp : ''),
     }
 
