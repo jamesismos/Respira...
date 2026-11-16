@@ -363,7 +363,7 @@ export default function TriggersPage() {
                         </div>
                         <div className="rounded-lg bg-[#07111A]/70 p-2">
                           <p className="text-[#64748B]">Duração</p>
-                          <p className="text-[#F8FAFC] mt-1">{log.durationMinutes ? log.durationMinutes + ' min' : 'Não informada'}</p>
+                          <p className="text-[#F8FAFC] mt-1">{log.durationMinutes ? (log.durationMinutes >= 60 ? 'Mais de 30 min' : log.durationMinutes + ' min') : 'Não informada'}</p>
                         </div>
                       </div>
                       {log.notes && (
