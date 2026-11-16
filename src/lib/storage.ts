@@ -1,5 +1,5 @@
 // ============================================================
-// Respira — Local Storage Layer
+// Respira: Local Storage Layer
 // Ponto único de acesso ao localStorage. Nenhum dado sai do dispositivo.
 // ============================================================
 
