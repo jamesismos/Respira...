@@ -30,7 +30,7 @@ export default function TriggerForm({ onSave, onCancel, resisted = true }: Trigg
       {/* Gatilho */}
       <div>
         <label className="block text-[#A7B4C2] text-sm font-medium mb-2">O que ativou?</label>
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
           {defaultTriggers.map(t => (
             <button
               key={t.id}
