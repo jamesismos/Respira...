@@ -23,6 +23,7 @@ export interface CravingLog {
   notes?: string
   mood?: string
   durationMinutes?: number
+  where?: string
 }
 
 export interface RelapseLog {
