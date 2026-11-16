@@ -1,8 +1,8 @@
 'use client'
 
 import type { CravingLog } from '@/types'
-import { defaultTriggers, moodOptions } from '@/data/triggers'
-import { CigaretteOff, Cigarette, X, Clock, Flame, MessageCircle } from 'lucide-react'
+import { defaultTriggers, locationOptions, moodOptions } from '@/data/triggers'
+import { CigaretteOff, Cigarette, X, Clock, Flame, MessageCircle, MapPin } from 'lucide-react'
 import clsx from 'clsx'
 
 interface Props {
@@ -13,6 +13,7 @@ interface Props {
 export default function DiaryDetailModal({ log, onClose }: Props) {
   const trigger = defaultTriggers.find(t => t.id === log.trigger)
   const mood = moodOptions.find(m => m.id === log.mood)
+  const location = locationOptions.find(item => item.id === log.where)
 
   const date = new Date(log.timestamp)
   const formattedDate = date.toLocaleDateString('pt-BR', {
@@ -32,7 +33,7 @@ export default function DiaryDetailModal({ log, onClose }: Props) {
       onClick={onClose}
     >
       <div
-        className="bg-[#0F1B24] rounded-t-3xl sm:rounded-3xl w-full max-w-md p-6 border border-[rgba(56,189,248,0.15)] max-h-[85vh] overflow-y-auto animate-slide-in"
+        className="bg-[#0F1B24] rounded-t-3xl sm:rounded-3xl w-full max-w-md sm:max-w-lg p-5 sm:p-6 border border-[rgba(56,189,248,0.15)] max-h-[85vh] overflow-y-auto animate-slide-in"
         onClick={e => e.stopPropagation()}
       >
         {/* Header */}
@@ -106,13 +107,23 @@ export default function DiaryDetailModal({ log, onClose }: Props) {
             </div>
           )}
 
+          {log.where && (
+            <div className="flex items-center gap-3 p-3 rounded-xl bg-[#07111A]">
+              <MapPin size={16} className="text-[#38BDF8] shrink-0" />
+              <div>
+                <p className="text-[#A7B4C2] text-xs">Local</p>
+                <p className="text-[#F8FAFC] text-sm font-medium">{location?.label || log.where}</p>
+              </div>
+            </div>
+          )}
+
           {/* Duration */}
           {log.durationMinutes != null && log.durationMinutes > 0 && (
             <div className="flex items-center gap-3 p-3 rounded-xl bg-[#07111A]">
               <Clock size={16} className="text-[#A7B4C2] shrink-0" />
               <div>
                 <p className="text-[#A7B4C2] text-xs">Durou</p>
-                <p className="text-[#F8FAFC] text-sm font-medium">{log.durationMinutes} minutos</p>
+                <p className="text-[#F8FAFC] text-sm font-medium">{log.durationMinutes >= 60 ? 'Mais de 30 minutos' : log.durationMinutes + ' minutos'}</p>
               </div>
             </div>
           )}

@@ -48,7 +48,7 @@ export default function RelapseModal({ currentStreakDays, currentStreakHours, on
   if (step === 'confirm') {
     return (
       <div className="flex flex-col gap-6 animate-slide-in pb-4">
-        {/* Header — sem vermelho, sem drama */}
+        {/* Cabeçalho sem vermelho ou dramatização */}
         <div className="text-center">
           <div className="text-4xl mb-3">🌿</div>
           <h2 className="text-xl font-bold text-[#F8FAFC]">Tudo bem.</h2>

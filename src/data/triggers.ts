@@ -1,5 +1,5 @@
 // ============================================================
-// Respira — Default Triggers & Moods
+// Respira: Default Triggers & Moods
 // ============================================================
 
 export interface TriggerOption {
@@ -28,6 +28,16 @@ export const defaultTriggers: TriggerOption[] = [
   { id: 'social', label: 'Social / amigos', emoji: '👥' },
   { id: 'dirigindo', label: 'Dirigindo', emoji: '🚗' },
   { id: 'outro', label: 'Outro', emoji: '💭' },
+]
+
+export const locationOptions = [
+  { id: 'casa', label: 'Em casa', emoji: '🏠' },
+  { id: 'trabalho', label: 'No trabalho', emoji: '💼' },
+  { id: 'social', label: 'Com outras pessoas', emoji: '👥' },
+  { id: 'sozinho', label: 'Sozinho(a)', emoji: '🚶' },
+  { id: 'bar', label: 'Bar ou festa', emoji: '🎉' },
+  { id: 'carro', label: 'No carro', emoji: '🚗' },
+  { id: 'outro', label: 'Outro lugar', emoji: '📍' },
 ]
 
 export const moodOptions: MoodOption[] = [

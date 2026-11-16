@@ -1,5 +1,5 @@
 // ============================================================
-// Respira — Motivational Phrases
+// Respira: Motivational Phrases
 // Personal messages from James to her ❤️
 // ============================================================
 

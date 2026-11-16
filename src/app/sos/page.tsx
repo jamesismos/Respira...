@@ -67,8 +67,8 @@ export default function SOSPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#07111A] flex flex-col pb-safe mb-nav">
-      <div className="max-w-md mx-auto w-full flex flex-col flex-1">
+    <div className="min-h-[100dvh] bg-[#07111A] flex flex-col pb-safe mb-nav">
+      <div className="page-shell page-shell--sos flex flex-col flex-1">
 
         {/* Header */}
         <div className="flex items-center gap-3 px-5 pt-8 pb-4">
@@ -136,7 +136,7 @@ export default function SOSPage() {
                 onClick={() => setPhase('breathing')}
                 className="text-[#A7B4C2] text-sm text-center underline underline-offset-4"
               >
-                Ainda estou com vontade — voltar à respiração
+                Ainda estou com vontade. Voltar à respiração.
               </button>
             </div>
           </div>

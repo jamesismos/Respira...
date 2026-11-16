@@ -47,7 +47,7 @@ describe('backup', () => {
     const result = await importBackup(file)
 
     expect(result.success).toBe(true)
-    expect(loadAppData().schemaVersion).toBe(2)
+    expect(loadAppData().schemaVersion).toBe(3)
     expect(loadAppData().settings.reminderTime).toBe('20:00')
   })
 

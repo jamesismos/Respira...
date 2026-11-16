@@ -3,8 +3,8 @@ import { CloudOff, RefreshCw } from "lucide-react";
 
 export default function OfflinePage() {
   return (
-    <main className="flex min-h-screen items-center justify-center bg-[#07111A] px-6 py-12 text-[#F8FAFC]">
-      <section className="w-full max-w-sm text-center">
+    <main className="flex min-h-[100dvh] items-center justify-center bg-[#07111A] px-6 py-12 text-[#F8FAFC]">
+      <section className="w-full max-w-sm sm:max-w-md text-center">
         <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full border border-[#38BDF8]/25 bg-[#0F1B24] text-[#38BDF8]">
           <CloudOff size={32} aria-hidden="true" />
         </div>

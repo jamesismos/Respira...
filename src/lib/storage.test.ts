@@ -55,9 +55,9 @@ describe('persistência local', () => {
     localStorage.setItem('respira_data', JSON.stringify(raw))
 
     const migrated = loadAppData()
-    expect(migrated.schemaVersion).toBe(2)
+    expect(migrated.schemaVersion).toBe(3)
     expect(migrated.profile?.cigarettesPerDay).toBe(20)
-    expect(JSON.parse(localStorage.getItem('respira_data') || '{}').schemaVersion).toBe(2)
+    expect(JSON.parse(localStorage.getItem('respira_data') || '{}').schemaVersion).toBe(3)
   })
 
   it('bloqueia gravações quando o JSON local está corrompido e preserva o conteúdo original', () => {
@@ -106,6 +106,25 @@ describe('persistência local', () => {
     expect(saved.profile?.lastSmoked).toBe(timestamp)
     expect(saved.relapseLogs).toHaveLength(1)
     expect(saved.relapseLogs[0].previousStreakDays).toBeGreaterThanOrEqual(3)
+  })
+
+  it('preserva local e duração no registro de vontade', () => {
+    expect(saveAppData(createData(createProfile()))).toBe(true)
+    const log: CravingLog = {
+      id: 'craving-context-test',
+      timestamp: new Date().toISOString(),
+      trigger: 'estresse',
+      intensity: 4,
+      resisted: true,
+      mood: 'ansioso',
+      where: 'trabalho',
+      durationMinutes: 15,
+    }
+
+    expect(addCravingLog(log)).toBe(true)
+    const saved = loadAppData()
+    expect(saved.cravingLogs[0].where).toBe('trabalho')
+    expect(saved.cravingLogs[0].durationMinutes).toBe(15)
   })
 
   it('salva recaída e diário em uma única operação', () => {

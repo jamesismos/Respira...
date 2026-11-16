@@ -16,8 +16,9 @@ import StatCard from '@/components/StatCard'
 import SOSButton from '@/components/SOSButton'
 import BottomNav from '@/components/BottomNav'
 import RelapseModal from '@/components/RelapseModal'
-import { Clock, DollarSign, CigaretteOff, BookOpen, TrendingUp } from 'lucide-react'
+import { Clock, DollarSign, CigaretteOff, BookOpen, TrendingUp, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
+import { getReportAvailability } from '@/lib/report'
 
 export default function HomePage() {
   const router = useRouter()
@@ -97,6 +98,7 @@ export default function HomePage() {
       intensity: 5,
       resisted: false,
       mood: formData.mood,
+      where: formData.where,
       notes: formData.whatHappened + (formData.whatCouldHelp ? '\n\nO que pode ajudar na próxima vez: ' + formData.whatCouldHelp : ''),
     }
 
@@ -112,9 +114,16 @@ export default function HomePage() {
 
   if (!profile) return null
 
+  const reportAvailability = getReportAvailability(profile.startDate)
+  const reportMessage = reportAvailability.recommendedComplete
+    ? 'Você completou 30 dias. Seu relatório já está pronto para exportação.'
+    : reportAvailability.canExport
+      ? 'Você já pode exportar seu relatório. Continue registrando para enriquecer a análise.'
+      : 'Use por 30 dias para uma visão mais completa. A exportação fica disponível após 7 dias completos.'
+
   return (
-    <div className="min-h-screen bg-[#07111A] flex flex-col pb-safe mb-nav">
-      <div className="max-w-md mx-auto w-full px-5 pt-10 flex flex-col gap-6">
+    <div className="min-h-[100dvh] bg-[#07111A] flex flex-col pb-safe mb-nav">
+      <div className="page-shell page-shell--wide px-5 pt-8 sm:pt-10 flex flex-col gap-6">
 
         {/* Header */}
         <div className="flex items-center justify-between animate-float-up">
@@ -130,7 +139,7 @@ export default function HomePage() {
           />
         </div>
 
-        {/* ── TEMPO SEM FUMAR — destaque máximo ── */}
+        {/* Tempo sem fumar */}
         <div
           className="glass-card p-6 flex flex-col items-center gap-2 animate-glow animate-float-up border-[rgba(56,189,248,0.25)]"
           style={{ animationDelay: '0.1s' }}
@@ -174,13 +183,13 @@ export default function HomePage() {
           )}
         </div>
 
-        {/* ── SOS BUTTON — protagonista ── */}
+        {/* Acesso rápido ao SOS */}
         <div className="flex flex-col items-center gap-3 py-2 animate-float-up" style={{ animationDelay: '0.15s' }}>
           <SOSButton size="xl" />
           <p className="text-[#A7B4C2] text-sm">Bateu vontade? Toca aqui.</p>
         </div>
 
-        {/* ── STATS ── */}
+        {/* Indicadores principais */}
         <div className="grid grid-cols-2 gap-3 animate-float-up" style={{ animationDelay: '0.2s' }}>
           <StatCard
             label="Economizado"
@@ -207,7 +216,20 @@ export default function HomePage() {
           </div>
         )}
 
-        {/* ── AÇÕES RÁPIDAS ── */}
+        <section className="glass-card p-4 border-[rgba(56,189,248,0.2)] animate-float-up" style={{ animationDelay: '0.28s' }}>
+          <Link href="/triggers" className="flex items-start justify-between gap-3">
+            <div className="min-w-0">
+              <p className="text-[#F8FAFC] font-semibold text-sm">Relatório pessoal</p>
+              <p className="text-[#A7B4C2] text-xs leading-relaxed mt-1">{reportMessage}</p>
+            </div>
+            <ChevronRight size={18} className="text-[#38BDF8] shrink-0 mt-1" />
+          </Link>
+          <p className="text-[#64748B] text-xs leading-relaxed mt-3">
+            Registre cada vontade, o que motivou, o horário, seu humor e onde estava. Mesmo quando resistir, esse momento importa.
+          </p>
+        </section>
+
+        {/* Ações rápidas */}
         <div className="flex flex-col gap-2 animate-float-up" style={{ animationDelay: '0.3s' }}>
           <p className="text-[#A7B4C2] text-xs font-medium uppercase tracking-wide">Ações rápidas</p>
           <div className="grid grid-cols-2 gap-2">
@@ -230,7 +252,7 @@ export default function HomePage() {
               id="btn-log-trigger"
               className="py-3.5 px-4 rounded-xl bg-[#0F1B24] border border-[rgba(56,189,248,0.15)] text-[#F8FAFC] text-sm font-medium text-left flex items-center gap-2 active:bg-[#162230] transition-colors"
             >
-              <BookOpen size={15} className="text-[#38BDF8]" /> Registrar gatilho
+              <BookOpen size={15} className="text-[#38BDF8]" /> Registrar momento
             </Link>
             <Link
               href="/progress"

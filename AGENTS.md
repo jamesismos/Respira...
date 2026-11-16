@@ -123,7 +123,14 @@ AppData         ← estrutura completa para backup
 | `/onboarding` | Configuração inicial |
 | `/home` | Home principal e registro de recaída (modal) |
 | `/sos` | SOS Vontade (core feature) |
-| `/triggers` | Diário de gatilhos |
+| `/triggers` | Relatório pessoal e registro de vontades |
 | `/progress` | Progresso |
 | `/settings` | Configurações |
 | `/settings/donate` | Apoiar o projeto (discreto) |
+
+
+## Relatório pessoal
+
+- A exportação do relatório é local, via janela de impressão do navegador, sem upload de dados.
+- Liberar PDF após sete dias completos de uso e recomendar trinta dias para uma análise mais consistente.
+- Preservar registros antigos ao adicionar campos opcionais de contexto, como local.

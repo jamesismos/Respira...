@@ -1,5 +1,5 @@
 // ============================================================
-// Respira — TypeScript Types
+// Respira: TypeScript Types
 // ============================================================
 
 export interface UserProfile {
@@ -23,6 +23,7 @@ export interface CravingLog {
   notes?: string
   mood?: string
   durationMinutes?: number
+  where?: string
 }
 
 export interface RelapseLog {

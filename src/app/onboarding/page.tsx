@@ -10,7 +10,7 @@ import clsx from 'clsx'
 import { ChevronRight, ChevronLeft, Leaf, Wallet, HeartPulse, Cigarette } from 'lucide-react'
 import { formatCurrency } from '@/lib/stats'
 
-// ─── Steps ───────────────────────────────────────────────────
+// Etapas do onboarding
 
 type StepId =
   | 'welcome'
@@ -127,7 +127,7 @@ export default function OnboardingPage() {
     : 0
 
   return (
-    <div className="min-h-screen bg-[#07111A] flex flex-col">
+    <div className="min-h-[100dvh] bg-[#07111A] flex flex-col">
       {/* Top progress bar */}
       {showProgress && (
         <div className="h-1 bg-[#162230]">
@@ -138,7 +138,7 @@ export default function OnboardingPage() {
         </div>
       )}
 
-      <div className="flex-1 flex flex-col max-w-md mx-auto w-full px-6 py-8">
+      <div className="page-shell page-shell--onboarding flex-1 flex flex-col px-6 py-8">
         {saveError && <p role="alert" className="mb-4 rounded-xl border border-[#FB7185]/30 bg-[#FB7185]/10 p-3 text-sm text-[#FDA4AF]">{saveError}</p>}
         {/* Back button */}
         {step !== 'welcome' && step !== 'done' && (
@@ -166,12 +166,18 @@ export default function OnboardingPage() {
               </div>
             </div>
 
-            <div className="glass-card p-5 text-center">
+            <div className="glass-card p-4 sm:p-5 text-center">
               <p className="text-[#F8FAFC] leading-relaxed text-sm">
                 Um espaço só seu. Sem julgamento, sem pressão.
                 <br />
                 Aqui você vai no seu ritmo.
               </p>
+              <div className="mt-4 pt-3 border-t border-[rgba(56,189,248,0.15)] text-left">
+                <p className="text-[#38BDF8] text-xs font-semibold uppercase tracking-wide">Relatório pessoal</p>
+                <p className="text-[#A7B4C2] text-sm leading-relaxed mt-1">
+                  Use por 30 dias para ter uma visão mais completa. A partir de 7 dias de uso, você já poderá exportar o relatório em PDF. Registre as vontades, os gatilhos, os horários e o que estava acontecendo.
+                </p>
+              </div>
             </div>
 
             <div className="w-full flex flex-col gap-3">
@@ -216,8 +222,8 @@ export default function OnboardingPage() {
                   )}
                 >
                   <span className="font-semibold">{n} cigarros</span>
-                  {n === 20 && <span className="text-[#A7B4C2] text-sm ml-2">— 1 maço</span>}
-                  {n === 40 && <span className="text-[#A7B4C2] text-sm ml-2">— 2 maços</span>}
+                  {n === 20 && <span className="text-[#A7B4C2] text-sm ml-2">, 1 maço</span>}
+                  {n === 40 && <span className="text-[#A7B4C2] text-sm ml-2">, 2 maços</span>}
                 </button>
               ))}
               <div className="flex gap-2 items-center mt-1">
@@ -320,7 +326,7 @@ export default function OnboardingPage() {
                       : 'border-[rgba(56,189,248,0.15)] text-[#F8FAFC]'
                   )}
                 >
-                  {n} cigarros {n === 20 && '— padrão'}
+                  {n} cigarros {n === 20 && '(padrão)'}
                 </button>
               ))}
             </div>
@@ -445,7 +451,7 @@ export default function OnboardingPage() {
               <p className="text-[#A7B4C2] text-sm leading-relaxed">
                 O Respira é um app gratuito para apoiar você a parar de fumar, uma vontade de cada vez.
                 A ideia é ajudar a interromper o ciclo da dependência da nicotina e reduzir a exposição
-                contínua à fumaça do tabaco — sem culpa e sem pressão.
+                contínua à fumaça do tabaco, sem culpa e sem pressão.
               </p>
             </div>
 
