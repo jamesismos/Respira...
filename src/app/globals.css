@@ -192,7 +192,6 @@ body {
     -webkit-text-fill-color: #111111 !important;
   }
 
-  .report-print-section,
   .report-print-entry {
     break-inside: avoid;
     page-break-inside: avoid;
