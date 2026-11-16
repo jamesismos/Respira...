@@ -1,5 +1,5 @@
 // ============================================================
-// Respira — Stats Calculator
+// Respira: Stats Calculator
 // ============================================================
 
 import type { UserProfile, SmokingStats } from '@/types'
