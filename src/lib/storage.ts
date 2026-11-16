@@ -7,7 +7,7 @@ import type { AppData, UserProfile, CravingLog, RelapseLog, AppSettings, DailyLo
 
 const STORAGE_KEY = 'respira_data'
 const APP_VERSION = '1.0.0'
-const CURRENT_SCHEMA_VERSION = 2
+const CURRENT_SCHEMA_VERSION = 3
 
 const defaultSettings: AppSettings = {
   theme: 'dark',
@@ -73,13 +73,14 @@ function parseProfile(value: unknown): UserProfile | null | undefined {
 
 function parseCravingLog(value: unknown): CravingLog | null {
   if (!isRecord(value)) return null
-  const { id, timestamp, trigger, intensity, resisted, notes, mood, durationMinutes } = value
+  const { id, timestamp, trigger, intensity, resisted, notes, mood, durationMinutes, where } = value
   if (typeof id !== 'string' || !id.trim() || !isValidTimestamp(timestamp) || typeof trigger !== 'string') return null
   if (typeof intensity !== 'number' || !Number.isInteger(intensity) || intensity < 1 || intensity > 5) return null
   if (typeof resisted !== 'boolean') return null
   if (notes !== undefined && typeof notes !== 'string') return null
   if (mood !== undefined && typeof mood !== 'string') return null
   if (durationMinutes !== undefined && (typeof durationMinutes !== 'number' || !Number.isFinite(durationMinutes) || durationMinutes < 0)) return null
+  if (where !== undefined && typeof where !== 'string') return null
   return {
     id,
     timestamp,
@@ -89,6 +90,7 @@ function parseCravingLog(value: unknown): CravingLog | null {
     ...(typeof notes === 'string' ? { notes } : {}),
     ...(typeof mood === 'string' ? { mood } : {}),
     ...(typeof durationMinutes === 'number' ? { durationMinutes } : {}),
+    ...(typeof where === 'string' ? { where } : {}),
   }
 }
 
@@ -321,7 +323,7 @@ export function addCravingLog(log: CravingLog): boolean {
         previousStreakHours,
         whatHappened: log.notes || 'Registrado via Diário. Gatilho: ' + log.trigger,
         mood: log.mood || 'outro',
-        where: 'outro',
+        where: log.where || 'outro',
         wasAutomatic: true,
         whatCouldHelp: '',
       }
