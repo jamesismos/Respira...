@@ -321,7 +321,7 @@ export function addCravingLog(log: CravingLog): boolean {
         timestamp: log.timestamp,
         previousStreakDays,
         previousStreakHours,
-        whatHappened: log.notes || 'Registrado via Diário. Gatilho: ' + log.trigger,
+        whatHappened: log.notes || 'Registrado no relatório. Gatilho: ' + log.trigger,
         mood: log.mood || 'outro',
         where: log.where || 'outro',
         wasAutomatic: true,
