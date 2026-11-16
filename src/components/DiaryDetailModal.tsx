@@ -123,7 +123,7 @@ export default function DiaryDetailModal({ log, onClose }: Props) {
               <Clock size={16} className="text-[#A7B4C2] shrink-0" />
               <div>
                 <p className="text-[#A7B4C2] text-xs">Durou</p>
-                <p className="text-[#F8FAFC] text-sm font-medium">{log.durationMinutes} minutos</p>
+                <p className="text-[#F8FAFC] text-sm font-medium">{log.durationMinutes >= 60 ? 'Mais de 30 minutos' : log.durationMinutes + ' minutos'}</p>
               </div>
             </div>
           )}
