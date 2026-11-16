@@ -27,6 +27,8 @@ export default function TriggerForm({ onSave, onCancel, resisted = true }: Trigg
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+      <p className="text-[#64748B] text-xs">O horário é registrado automaticamente no momento em que você salva.</p>
+
       {/* Gatilho */}
       <div>
         <label className="block text-[#A7B4C2] text-sm font-medium mb-2">O que ativou?</label>
