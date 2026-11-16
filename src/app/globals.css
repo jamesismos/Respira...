@@ -168,6 +168,8 @@ body {
   #report-print-area,
   #report-print-area * {
     visibility: visible !important;
+    color: #111111 !important;
+    -webkit-text-fill-color: #111111 !important;
   }
 
   #report-print-area {
