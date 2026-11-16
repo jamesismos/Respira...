@@ -1,6 +1,6 @@
 // ============================================================
-// Respira — Donation Config
-// Public utility app — James Oliveira
+// Respira: Donation Config
+// Public utility app | James Oliveira
 //
 // 👋 James: edite este arquivo para configurar sua chave Pix.
 // Use uma chave ALEATÓRIA (gerada pelo seu banco) para não
