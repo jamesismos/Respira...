@@ -118,8 +118,8 @@ export default function SettingsPage() {
   const triggerLabels = profile.triggers.map(id => defaultTriggers.find(trigger => trigger.id === id)?.label || id)
 
   return (
-    <div className="min-h-screen bg-[#07111A] flex flex-col pb-safe mb-nav">
-      <div className="max-w-md mx-auto w-full px-5 pt-10 flex flex-col gap-6">
+    <div className="min-h-[100dvh] bg-[#07111A] flex flex-col pb-safe mb-nav">
+      <div className="page-shell page-shell--wide px-5 pt-8 sm:pt-10 flex flex-col gap-6">
         <div className="flex items-center gap-2">
           <Settings size={20} className="text-[#38BDF8]" />
           <h1 className="text-xl font-bold text-[#F8FAFC]">Configurações</h1>
@@ -233,7 +233,7 @@ export default function SettingsPage() {
             Você não precisa fazer isso sozinho. O SUS oferece tratamento para parar de fumar. Procure a Unidade Básica de Saúde (UBS) da sua região para saber como acessar o acompanhamento.
           </p>
           <a href="https://www.gov.br/inca/pt-br/assuntos/causas-e-prevencao-do-cancer/tabagismo/como-parar-de-fumar" target="_blank" rel="noopener noreferrer" className="flex items-center justify-between gap-3 rounded-xl bg-[#162230] p-3 text-sm text-[#7DD3FC]">
-            Como parar de fumar — INCA
+            Como parar de fumar: INCA
             <ExternalLink size={15} aria-hidden="true" />
           </a>
           <a href="https://www.saude.mg.gov.br/vidasaudavel/tabagismo/" target="_blank" rel="noopener noreferrer" className="flex items-center justify-between gap-3 rounded-xl bg-[#162230] p-3 text-sm text-[#7DD3FC]">
