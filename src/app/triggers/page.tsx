@@ -14,7 +14,6 @@ import {
   BookOpen,
   CalendarDays,
   Cigarette,
-  CigaretteOff,
   Clock3,
   FileDown,
   MapPin,
@@ -91,7 +90,6 @@ export default function TriggersPage() {
   const availability = getReportAvailability(profile.startDate)
   const insights = buildReportInsights(logs)
   const maxTriggerCount = insights.triggers[0]?.count || 1
-  const dayLabel = availability.daysUsed === 1 ? 'dia de acompanhamento' : 'dias de acompanhamento'
   const exportMessage = availability.recommendedComplete
     ? 'Você completou 30 dias de acompanhamento. O relatório já pode ser exportado.'
     : availability.canExport
@@ -110,7 +108,7 @@ export default function TriggersPage() {
 
   return (
     <div className="min-h-[100dvh] bg-[#07111A] flex flex-col pb-safe mb-nav">
-      <main className="page-shell page-shell--wide flex flex-col gap-5">
+      <main className="page-shell page-shell--wide px-4 sm:px-6 lg:px-8 pt-8 sm:pt-10 flex flex-col gap-5">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between no-print">
           <div>
             <div className="flex items-center gap-2">
@@ -142,7 +140,7 @@ export default function TriggersPage() {
                 Registre cada vontade, mesmo quando conseguir resistir. Anote o gatilho, o horário, o humor, o local e o que estava acontecendo.
               </p>
               <div className="mt-4 flex items-center justify-between gap-3 text-xs">
-                <span className="text-[#A7B4C2]">{availability.daysUsed} {dayLabel}</span>
+                <span className="text-[#A7B4C2]">Dia {availability.daysUsed} do acompanhamento</span>
                 <span className="text-[#38BDF8] font-semibold">{availability.progressPercent}% de 30 dias</span>
               </div>
               <div className="mt-2 h-2 rounded-full bg-[#162230] overflow-hidden">
