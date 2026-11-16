@@ -1,5 +1,5 @@
 // ============================================================
-// Respira — Default Triggers & Moods
+// Respira: Default Triggers & Moods
 // ============================================================
 
 export interface TriggerOption {
