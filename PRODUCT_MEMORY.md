@@ -179,3 +179,16 @@ src/data/            ← dados estáticos: frases, gatilhos, doação
 - Não usar push remoto nem analytics além do Vercel Web Analytics de visualizações de página; sem eventos personalizados.
 - Sem backend/push, o navegador não garante notificações agendadas quando o app está totalmente fechado. A interface deve comunicar essa limitação.
 - Alterar o domínio cria uma origem diferente e, portanto, outro armazenamento local. Orientar exportação/importação de backup antes da troca.
+
+
+---
+
+## Relatório pessoal e contexto dos registros
+
+- A área antes chamada Diário passa a ser o Relatório pessoal, mantendo o formulário para registrar cada vontade ou situação.
+- O relatório reúne motivo para parar, gatilhos, intensidade, resistência, horário automático, humor, local, duração, observações e histórico de recaídas.
+- A exportação em PDF é liberada após sete dias completos de uso. Trinta dias são o período recomendado para uma leitura mais consistente dos padrões.
+- O PDF é produzido no próprio dispositivo por meio da impressão do navegador. Não enviar os registros a serviços externos.
+- Os registros antigos continuam válidos. Campos novos, como local, são opcionais e compatíveis com dados anteriores.
+- O formulário deve facilitar o registro sem exigir que a pessoa preencha tudo. Incentivar o registro das vontades resistidas e não apenas das situações em que fumou.
+- Layout responsivo deve priorizar telas pequenas, respeitar áreas seguras e ampliar o conteúdo em telas médias e grandes.
