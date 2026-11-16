@@ -1,5 +1,5 @@
 // ============================================================
-// Respira — Backup: exportação e restauração validadas
+// Respira: Backup com exportação e restauração validadas
 // ============================================================
 
 import type { AppData } from '@/types'
