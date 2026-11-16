@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://respira-nine.vercel.app'),
   applicationName: 'Respira',
   title: {
-    default: 'Respira — Uma vontade de cada vez',
+    default: 'Respira: Uma vontade de cada vez',
     template: '%s | Respira',
   },
   description:
