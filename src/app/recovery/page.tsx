@@ -25,8 +25,8 @@ export default function RecoveryPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#07111A] px-5 py-12 text-[#F8FAFC]">
-      <div className="mx-auto flex w-full max-w-md flex-col gap-6">
+    <main className="min-h-[100dvh] bg-[#07111A] px-5 py-12 text-[#F8FAFC]">
+      <div className="mx-auto flex w-full max-w-md sm:max-w-lg flex-col gap-6">
         <div className="flex items-center gap-3">
           <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#FBBF24]/10 text-[#FBBF24]">
             <AlertTriangle size={24} aria-hidden="true" />
