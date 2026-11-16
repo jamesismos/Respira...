@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { defaultTriggers, moodOptions } from '@/data/triggers'
+import { defaultTriggers, locationOptions, moodOptions } from '@/data/triggers'
 import type { CravingLog } from '@/types'
 import clsx from 'clsx'
 
@@ -14,13 +14,15 @@ interface TriggerFormProps {
 export default function TriggerForm({ onSave, onCancel, resisted = true }: TriggerFormProps) {
   const [trigger, setTrigger] = useState('')
   const [mood, setMood] = useState('')
+  const [where, setWhere] = useState('')
+  const [duration, setDuration] = useState('')
   const [intensity, setIntensity] = useState<1 | 2 | 3 | 4 | 5>(3)
   const [didResist, setDidResist] = useState(resisted)
   const [notes, setNotes] = useState('')
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    onSave({ trigger: trigger || 'outro', mood: mood || undefined, intensity, resisted: didResist, notes: notes || undefined })
+    onSave({ trigger: trigger || 'outro', mood: mood || undefined, intensity, resisted: didResist, notes: notes || undefined, where: where || undefined, durationMinutes: duration ? Number(duration) : undefined })
   }
 
   return (
@@ -43,6 +45,30 @@ export default function TriggerForm({ onSave, onCancel, resisted = true }: Trigg
             >
               <span className="text-lg">{t.emoji}</span>
               <span className="leading-tight text-center">{t.label}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Local */}
+      <div>
+        <label className="block text-[#A7B4C2] text-sm font-medium mb-2">Onde você estava? <span className="text-[#64748B]">(opcional)</span></label>
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+          {locationOptions.map(place => (
+            <button
+              key={place.id}
+              type="button"
+              aria-pressed={where === place.id}
+              onClick={() => setWhere(where === place.id ? '' : place.id)}
+              className={clsx(
+                'flex items-center gap-2 p-2.5 rounded-xl border text-xs transition-all duration-150',
+                where === place.id
+                  ? 'border-[#38BDF8] bg-[rgba(56,189,248,0.1)] text-[#38BDF8]'
+                  : 'border-[rgba(56,189,248,0.15)] text-[#A7B4C2] active:bg-[#162230]'
+              )}
+            >
+              <span>{place.emoji}</span>
+              <span className="text-left">{place.label}</span>
             </button>
           ))}
         </div>
@@ -95,6 +121,26 @@ export default function TriggerForm({ onSave, onCancel, resisted = true }: Trigg
         </div>
       </div>
 
+      {/* Duração */}
+      <div>
+        <label htmlFor="craving-duration" className="block text-[#A7B4C2] text-sm font-medium mb-2">
+          Quanto tempo durou a vontade? <span className="text-[#64748B]">(opcional)</span>
+        </label>
+        <select
+          id="craving-duration"
+          value={duration}
+          onChange={e => setDuration(e.target.value)}
+          className="w-full bg-[#162230] border border-[rgba(56,189,248,0.15)] rounded-xl px-3 py-3 text-[#F8FAFC] text-sm focus:outline-none focus:border-[#38BDF8]"
+        >
+          <option value="">Não lembro ou prefiro não informar</option>
+          <option value="5">Até 5 minutos</option>
+          <option value="10">De 5 a 10 minutos</option>
+          <option value="20">De 10 a 20 minutos</option>
+          <option value="30">De 20 a 30 minutos</option>
+          <option value="60">Mais de 30 minutos</option>
+        </select>
+      </div>
+
       {/* Resistiu? */}
       <div>
         <label className="block text-[#A7B4C2] text-sm font-medium mb-2">Resultado</label>
@@ -124,13 +170,13 @@ export default function TriggerForm({ onSave, onCancel, resisted = true }: Trigg
       {/* Observação */}
       <div>
         <label className="block text-[#A7B4C2] text-sm font-medium mb-2">
-          Observação <span className="text-[#64748B]">(opcional)</span>
+          O que estava acontecendo? <span className="text-[#64748B]">(opcional)</span>
         </label>
         <textarea
           value={notes}
           onChange={e => setNotes(e.target.value)}
-          placeholder="O que mais você quer lembrar sobre esse momento?"
-          rows={2}
+          placeholder="Ex.: estava sozinho, depois do café, preocupado com o trabalho..."
+          rows={3}
           className="w-full bg-[#162230] border border-[rgba(56,189,248,0.15)] rounded-xl px-4 py-3 text-[#F8FAFC] placeholder-[#64748B] text-sm resize-none focus:outline-none focus:border-[#38BDF8] transition-colors"
         />
       </div>
