@@ -57,7 +57,7 @@ describe('persistência local', () => {
     const migrated = loadAppData()
     expect(migrated.schemaVersion).toBe(3)
     expect(migrated.profile?.cigarettesPerDay).toBe(20)
-    expect(JSON.parse(localStorage.getItem('respira_data') || '{}').schemaVersion).toBe(2)
+    expect(JSON.parse(localStorage.getItem('respira_data') || '{}').schemaVersion).toBe(3)
   })
 
   it('bloqueia gravações quando o JSON local está corrompido e preserva o conteúdo original', () => {
