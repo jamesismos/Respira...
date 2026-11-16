@@ -14,7 +14,7 @@ export default function SOSButton({ size = 'xl' }: SOSButtonProps) {
       href="/sos"
       id="sos-button-main"
       className="relative flex items-center justify-center group select-none"
-      aria-label="SOS Vontade — abre o fluxo de crise"
+      aria-label="SOS Vontade. Abre o fluxo de crise"
     >
       {/* Pulse rings */}
       <span
