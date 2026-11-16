@@ -1,5 +1,5 @@
 // ============================================================
-// Respira — TypeScript Types
+// Respira: TypeScript Types
 // ============================================================
 
 export interface UserProfile {
