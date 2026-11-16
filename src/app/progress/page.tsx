@@ -88,8 +88,8 @@ export default function ProgressPage() {
   const maxBar = Math.max(...last14Days.map(d => d.resisted + d.relapsed), 1)
 
   return (
-    <div className="min-h-screen bg-[#07111A] flex flex-col pb-safe mb-nav">
-      <div className="max-w-md mx-auto w-full px-5 pt-10 flex flex-col gap-6">
+    <div className="min-h-[100dvh] bg-[#07111A] flex flex-col pb-safe mb-nav">
+      <div className="page-shell page-shell--wide px-5 pt-8 sm:pt-10 flex flex-col gap-6">
 
         {/* Header */}
         <div className="flex items-center gap-2 animate-float-up">
@@ -115,7 +115,7 @@ export default function ProgressPage() {
         </div>
 
         {/* Stats grid */}
-        <div className="grid grid-cols-2 gap-3 animate-float-up" style={{ animationDelay: '0.1s' }}>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 animate-float-up" style={{ animationDelay: '0.1s' }}>
           <StatCard
             label="Economizado"
             value={formatCurrency(stats.moneySaved)}
@@ -210,7 +210,7 @@ export default function ProgressPage() {
           </div>
         )}
 
-        {/* Saúde — linguagem conservadora, como especificado */}
+        {/* Saúde: linguagem conservadora */}
         <div className="glass-card p-4 border-[rgba(52,211,153,0.15)] animate-float-up" style={{ animationDelay: '0.25s' }}>
           <p className="text-[#A7B4C2] text-xs font-medium uppercase tracking-wide mb-2">
             Melhorias comuns após parar de fumar
