@@ -94,7 +94,7 @@ export default function NotificationSettings() {
     setMessage('')
     setMessageIsError(false)
     const shown = await showLocalNotification(
-      'Respira — teste de notificação',
+      'Respira: teste de notificação',
       'Está tudo funcionando. Uma vontade de cada vez.',
       '/home',
     )
